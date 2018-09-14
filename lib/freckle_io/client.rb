@@ -3,6 +3,7 @@ require 'freckle_io/paginator'
 require 'freckle_io/client/users'
 require 'faraday'
 require 'faraday_middleware'
+require 'pry'
 
 module FreckleIO
   class Client
@@ -23,6 +24,25 @@ module FreckleIO
       response
     end
 
+    def all(path)
+      last_response_body = []
+
+      page = get(path)
+      last_response_body.concat(page.body)
+
+      loop do
+        if paginator.next
+          page = self.next
+        else
+          break
+        end
+        last_response_body.concat(page.body) if page.body.is_a? Array
+      end
+
+      page.env.body = last_response_body
+      page
+    end
+
     def next
       next_page = paginator.next
       next_page ? get(next_page) : nil
@@ -41,9 +61,6 @@ module FreckleIO
     def first
       first_page = paginator.first
       first_page ? get(first_page) : nil
-    end
-
-    def paginate
     end
 
     private

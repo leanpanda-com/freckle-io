@@ -2,7 +2,7 @@ module FreckleIO
   class Client
     module Users
       def users
-        get "/v2/users"
+        all "/v2/users"
       end
     end
   end
