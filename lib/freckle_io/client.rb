@@ -25,21 +25,15 @@ module FreckleIO
     end
 
     def all(path)
-      last_response_body = []
-
       page = get(path)
-      last_response_body.concat(page.body)
 
       loop do
-        if paginator.next
-          page = self.next
-        else
-          break
-        end
-        last_response_body.concat(page.body) if page.body.is_a? Array
+        break if !paginator.next
+
+        next_page = self.next
+        page.env.body.concat(next_page.body) if page.body.is_a? Array
       end
 
-      page.env.body = last_response_body
       page
     end
 
