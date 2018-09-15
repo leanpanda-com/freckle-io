@@ -28,33 +28,44 @@ module FreckleIO
       page = get(path)
 
       loop do
-        break if !paginator.next
+        break if !next?
 
-        next_page = self.next
-        page.env.body.concat(next_page.body) if page.body.is_a? Array
+        page.env.body.concat(self.next.body) if page.body.is_a? Array
       end
 
       page
     end
 
     def next
-      next_page = paginator.next
-      next_page ? get(next_page) : nil
+      next? ? get(paginator.next) : nil
+    end
+
+    def next?
+      paginator.next
     end
 
     def prev
-      prev_page = paginator.prev
-      prev_page ? get(prev_page) : nil
+      prev? ? get(paginator.prev) : nil
+    end
+
+    def prev?
+      paginator.prev
     end
 
     def last
-      last_page = paginator.last
-      last_page ? get(last_page) : nil
+      last? ? get(paginator.last) : nil
+    end
+
+    def last?
+      paginator.last
     end
 
     def first
-      first_page = paginator.first
-      first_page ? get(first_page) : nil
+      first? ? get(paginator.first) : nil
+    end
+
+    def first?
+      paginator.first
     end
 
     private
