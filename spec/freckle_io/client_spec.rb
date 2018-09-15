@@ -55,12 +55,22 @@ module FreckleIO
       end
 
       describe "#get" do
-        it 'returns an array of users' do
-          expect(users.body).to be_a Array
+        context "with params" do
+          let(:users) { client.get("/v2/users", params: { page: 2 }) }
+
+          it "returns an array of users" do
+            expect(users.body).to be_a Array
+          end
         end
 
-        it 'returns an user' do
-          expect(users.body.first.keys).to eq(user_info)
+        context "without params" do
+          it 'returns an array of users' do
+            expect(users.body).to be_a Array
+          end
+
+          it 'returns an user' do
+            expect(users.body.first.keys).to eq(user_info)
+          end
         end
       end
 
