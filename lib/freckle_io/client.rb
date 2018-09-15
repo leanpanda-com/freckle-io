@@ -26,11 +26,15 @@ module FreckleIO
 
     def all(path)
       page = get(path)
+      page_body = page.env.body
 
       loop do
         break if !next?
 
-        page.env.body.concat(self.next.body) if page.body.is_a? Array
+        next_page = self.next
+        next_response_headers = next_page.env.response_headers
+        page_body.concat(next_page.body) if next_page.body.is_a? Array
+        page.env.response_headers = next_response_headers
       end
 
       page
