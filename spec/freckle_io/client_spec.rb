@@ -61,6 +61,10 @@ module FreckleIO
           it "returns an array of users" do
             expect(users.body).to be_a Array
           end
+
+          it 'returns an user' do
+            expect(users.body.first.keys).to eq(user_info)
+          end
         end
 
         context "without params" do
