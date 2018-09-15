@@ -13,9 +13,10 @@ module FreckleIO
     attr_reader :body
     attr_reader :raw_links
 
-    def get(path)
-      response = connection.get(path) do |request|
+    def get(path, params: {})
+      response = connection.get do |request|
         authorize_request(request)
+        request.url path, params
       end
 
       @raw_links = response.headers["link"] || []
