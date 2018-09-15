@@ -14,8 +14,12 @@ describe FreckleIO::Client::Users do
     let(:client) { FreckleIO::Client.new }
 
     describe '#users' do
+      before do
+        client.users
+      end
+
       it 'get all users' do
-        binding.pry
+        expect(client.next).to eq nil
       end
     end
   end
