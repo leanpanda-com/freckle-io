@@ -1,4 +1,5 @@
 require 'uri'
+require 'cgi'
 
 module FreckleIO
   class Paginator
@@ -24,6 +25,10 @@ module FreckleIO
       find("last")&.dig(:url)
     end
 
+    def total_pages
+      find("last")&.dig(:number_page)
+    end
+
     private
 
     def find(rel)
@@ -36,10 +41,12 @@ module FreckleIO
           url, rel = link.split(";").map(&:strip)
           rel = rel.gsub(/(rel=)?"/, '')
           url = URI.parse(url[1..-2])
+          number_page = CGI.parse(url.query)["page"]
 
           {
             url: "#{url.path}?#{url.query}",
-            rel: rel
+            rel: rel,
+            number_page: number_page.first
           }
         end
       end

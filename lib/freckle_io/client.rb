@@ -73,6 +73,12 @@ module FreckleIO
       paginator.first
     end
 
+    def total_pages
+      return [] if !paginator.total_pages
+
+      [1..paginator.total_pages.to_i]
+    end
+
     private
 
     def paginator

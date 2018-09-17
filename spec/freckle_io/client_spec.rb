@@ -126,6 +126,25 @@ module FreckleIO
           expect(users.body.first.keys).to eq(user_info)
         end
       end
+
+      describe '#total page' do
+        context 'with first page' do
+
+          it 'returns the range of pages' do
+            expect(client.total_pages).to be_a Array
+          end
+        end
+
+        context 'with other number of page' do
+          before do
+            client.next
+          end
+
+          it 'returns an empty array' do
+            expect(client.total_pages).to be_empty
+          end
+        end
+      end
     end
   end
 end

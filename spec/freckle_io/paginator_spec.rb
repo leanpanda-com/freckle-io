@@ -22,7 +22,7 @@ module FreckleIO
 
         let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
         let(:next_ref) do
-          {:url=>"/v2/users?page=2", :rel=>"next"}
+          {:url=>"/v2/users?page=2", :rel=>"next", :number_page=>"2"}
         end
 
         it "returns ref of next page" do
@@ -42,7 +42,7 @@ module FreckleIO
 
         let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
         let(:prev_ref) do
-          {:url=>"/v2/users?page=1", :rel=>"prev"}
+          {:url=>"/v2/users?page=1", :rel=>"prev", :number_page=>"1"}
         end
 
         it "returns ref of previous page" do
@@ -61,7 +61,7 @@ module FreckleIO
 
         let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
         let(:last_ref) do
-          {:url=>"/v2/users?page=2", :rel=>"last"}
+          {:url=>"/v2/users?page=2", :rel=>"last", :number_page=>"2"}
         end
 
         it "returns ref of previous page" do
@@ -81,7 +81,7 @@ module FreckleIO
 
         let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
         let(:first_ref) do
-          {:url=>"/v2/users?page=1", :rel=>"first"}
+          {:url=>"/v2/users?page=1", :rel=>"first", :number_page=>"1"}
         end
 
         it "returns ref of previous page" do
