@@ -131,7 +131,7 @@ module FreckleIO
         context 'with first page' do
 
           it 'returns the range of pages' do
-            expect(client.total_pages).to be_a Array
+            expect(client.total_pages).to be_a Integer
           end
         end
 
@@ -141,7 +141,7 @@ module FreckleIO
           end
 
           it 'returns an empty array' do
-            expect(client.total_pages).to be_empty
+            expect(client.total_pages).to eq(0)
           end
         end
       end
