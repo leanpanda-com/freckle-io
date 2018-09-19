@@ -1,5 +1,5 @@
-require 'uri'
-require 'cgi'
+require "uri"
+require "cgi"
 
 module FreckleIO
   class Paginator
@@ -37,9 +37,9 @@ module FreckleIO
 
     def pages
       @pages ||= begin
-        raw_links.split(',').map do |link|
+        raw_links.split(",").map do |link|
           url, rel = link.split(";").map(&:strip)
-          rel = rel.gsub(/(rel=)?"/, '')
+          rel = rel.gsub(/(rel=)?"/, "")
           url = URI.parse(url[1..-2])
           number_page = CGI.parse(url.query)["page"]
 

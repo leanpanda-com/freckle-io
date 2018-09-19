@@ -1,9 +1,8 @@
-require 'freckle_io/authentication'
-require 'freckle_io/paginator'
-require 'freckle_io/client/users'
-require 'faraday'
-require 'faraday_middleware'
-require 'pry'
+require "freckle_io/authentication"
+require "freckle_io/paginator"
+require "freckle_io/client/users"
+require "faraday"
+require "faraday_middleware"
 
 module FreckleIO
   class Client
@@ -87,7 +86,7 @@ module FreckleIO
       options = {
         url: FreckleIO.configuration.url,
         headers: {
-          user_agent: 'MyFreckleBot/1.0',
+          user_agent: "MyFreckleBot/1.0"
         }
       }
 
