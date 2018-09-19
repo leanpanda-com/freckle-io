@@ -1,7 +1,6 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.2
   Include:
     - "**/*.gemspec"
     - "**/*.podspec"
@@ -36,6 +35,7 @@ AllCops:
     - "spec/fixtures/vcr_cassettes/**/*"
   DisplayCopNames: false
   StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.2
 Layout/AccessModifierIndentation:
   Description: Check indentation of private/protected visibility modifiers.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#indent-public-private-protected
@@ -491,6 +491,9 @@ Metrics/BlockNesting:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#three-is-the-number-thou-shalt-count
   Enabled: false
   Max: 3
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
 Metrics/ClassLength:
   Description: Avoid classes longer than 100 lines of code.
   Enabled: false
@@ -1013,3 +1016,6 @@ RSpec/VerifiedDoubles:
   Enabled: true
 RSpec/InstanceVariable:
   Enabled: false
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 4
