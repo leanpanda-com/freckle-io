@@ -12,14 +12,15 @@ describe FreckleIO::Paginator do
     end
 
     let(:client) { FreckleIO::Client.new }
-    let!(:request) { client.get("/v2/users") }
+    let(:request) { client.get("/v2/users") }
 
     describe "#next" do
       before do
+        request
         paginator.next
       end
 
-      let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
+      let(:paginator) { described_class.new(client.raw_links) }
 
       it "returns link of next page" do
         expect(paginator.next).to eq("/v2/users?page=2")
@@ -28,11 +29,12 @@ describe FreckleIO::Paginator do
 
     describe "#prev" do
       before do
+        request
         client.last
         paginator.prev
       end
 
-      let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
+      let(:paginator) { described_class.new(client.raw_links) }
 
       it "returns link of previous page" do
         expect(paginator.prev).to eq("/v2/users?page=1")
@@ -41,10 +43,11 @@ describe FreckleIO::Paginator do
 
     describe "#last" do
       before do
+        request
         paginator.last
       end
 
-      let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
+      let(:paginator) { described_class.new(client.raw_links) }
 
       it "returns link of previous page" do
         expect(paginator.last).to eq("/v2/users?page=2")
@@ -53,11 +56,12 @@ describe FreckleIO::Paginator do
 
     describe "#first" do
       before do
+        request
         client.last
         paginator.first
       end
 
-      let(:paginator) { FreckleIO::Paginator.new(client.raw_links) }
+      let(:paginator) { described_class.new(client.raw_links) }
 
       it "returns link of previous page" do
         expect(paginator.first).to eq("/v2/users?page=1")

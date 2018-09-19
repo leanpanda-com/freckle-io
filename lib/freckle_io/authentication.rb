@@ -14,11 +14,6 @@ module FreckleIO
       case auth_type
       when :freckle_token
         request.headers["X-FreckleToken"] = token
-      else
-        raise(
-          Errors::Configuration,
-          "#{auth_type} isn't valid type authentication"
-        )
       end
     end
 
