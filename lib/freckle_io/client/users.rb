@@ -1,8 +1,14 @@
 module FreckleIO
-  class Client
-    module Users
+  module Client
+    class Users
       def users
-        all "/v2/users"
+        client.all("/v2/users")
+      end
+
+      private
+
+      def client
+        @client = FreckleIO::Client.new
       end
     end
   end
