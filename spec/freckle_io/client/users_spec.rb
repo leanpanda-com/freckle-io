@@ -11,15 +11,15 @@ describe FreckleIO::Client::Users do
       end
     end
 
-    let(:client) { FreckleIO::Client.new }
+    let(:users) { described_class.new }
 
-    describe "#users" do
+    describe "#all" do
       before do
-        client.users
+        users
       end
 
       it "get all users" do
-        expect(client.next).to eq nil
+        expect(users.all.body).to be_a(Array)
       end
     end
   end
