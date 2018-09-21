@@ -11,8 +11,8 @@ describe FreckleIO::Connection do
       end
     end
 
-    let(:client) { described_class.new }
-    let!(:users) { client.get("/v2/users") }
+    let(:connection) { described_class.new }
+    let!(:users) { connection.get("/v2/users") }
     let(:user_info) do
       [
         "id",
@@ -55,7 +55,7 @@ describe FreckleIO::Connection do
 
     describe "#get" do
       context "with params" do
-        let(:users) { client.get("/v2/users", params: { page: 2 }) }
+        let(:users) { connection.get("/v2/users", params: { page: 2 }) }
 
         it "returns an array of users" do
           expect(users.body).to be_a Array
@@ -79,7 +79,7 @@ describe FreckleIO::Connection do
 
     describe "#next" do
       it "returns an array of users" do
-        expect(client.next.body).to be_a Array
+        expect(connection.next.body).to be_a Array
       end
 
       it "returns an user" do
@@ -89,11 +89,11 @@ describe FreckleIO::Connection do
 
     describe "#prev" do
       before do
-        client.next
+        connection.next
       end
 
       it "returns an array of users" do
-        expect(client.prev.body).to be_a Array
+        expect(connection.prev.body).to be_a Array
       end
 
       it "returns an user" do
@@ -103,7 +103,7 @@ describe FreckleIO::Connection do
 
     describe "#last" do
       it "returns an array of users" do
-        expect(client.last.body).to be_a Array
+        expect(connection.last.body).to be_a Array
       end
 
       it "returns an user" do
@@ -113,11 +113,11 @@ describe FreckleIO::Connection do
 
     describe "#first" do
       before do
-        client.last
+        connection.last
       end
 
       it "returns an array of users" do
-        expect(client.first.body).to be_a Array
+        expect(connection.first.body).to be_a Array
       end
 
       it "returns an user" do
@@ -128,17 +128,17 @@ describe FreckleIO::Connection do
     describe "#total page" do
       context "with first page" do
         it "returns the range of pages" do
-          expect(client.total_pages).to be_a Integer
+          expect(connection.total_pages).to be_a Integer
         end
       end
 
       context "with other number of page" do
         before do
-          client.next
+          connection.next
         end
 
         it "returns an empty array" do
-          expect(client.total_pages).to eq(0)
+          expect(connection.total_pages).to eq(0)
         end
       end
     end
