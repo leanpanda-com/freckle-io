@@ -1,12 +1,16 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
+
 require "simplecov"
+require "simplecov-console"
 require "coveralls"
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   [
     SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::Console,
     Coveralls::SimpleCov::Formatter
   ]
 )

@@ -11,15 +11,21 @@ describe FreckleIO::Client::Users do
       end
     end
 
-    let(:client) { FreckleIO::Client.new }
+    let(:users) { described_class.new }
 
-    describe "#users" do
-      before do
-        client.users
-      end
+    describe "#all" do
+      let(:result) { users.all }
 
       it "get all users" do
-        expect(client.next).to eq nil
+        expect(result.body).to be_a(Array)
+      end
+    end
+
+    describe "#show" do
+      let(:result) { users.show(ENV['REAL_FRECKLE_USER_ID']) }
+
+      it "get a spacific user" do
+        expect(result.body.keys).to eq(USER_KEYS)
       end
     end
   end
