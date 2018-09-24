@@ -1,8 +1,14 @@
 module FreckleIO
   module Client
     class Users
+      USER_ENDPOINT = "/v2/users".freeze
+
       def all
-        client.all("/v2/users")
+        client.all(USER_ENDPOINT)
+      end
+
+      def show(id)
+        client.get("#{USER_ENDPOINT}/#{id}")
       end
 
       private
