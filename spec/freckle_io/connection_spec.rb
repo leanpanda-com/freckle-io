@@ -13,29 +13,6 @@ describe FreckleIO::Connection do
 
     let(:connection) { described_class.new }
     let!(:users) { connection.get("/v2/users") }
-    let(:user_info) do
-      [
-        "id",
-        "email",
-        "first_name",
-        "last_name",
-        "profile_image_url",
-        "state",
-        "role",
-        "entries",
-        "expenses",
-        "created_at",
-        "updated_at",
-        "url",
-        "entries_url",
-        "expenses_url",
-        "activate_url",
-        "deactivate_url",
-        "give_access_to_projects_url",
-        "revoke_access_to_projects_url",
-        "revoke_access_to_all_projects_url"
-      ]
-    end
 
     describe "with header" do
       it "set user agent" do
@@ -62,7 +39,7 @@ describe FreckleIO::Connection do
         end
 
         it "returns an user" do
-          expect(users.body.first.keys).to eq(user_info)
+          expect(users.body.first.keys).to eq(USER_KEYS)
         end
       end
 
@@ -72,7 +49,7 @@ describe FreckleIO::Connection do
         end
 
         it "returns an user" do
-          expect(users.body.first.keys).to eq(user_info)
+          expect(users.body.first.keys).to eq(USER_KEYS)
         end
       end
     end
@@ -83,7 +60,7 @@ describe FreckleIO::Connection do
       end
 
       it "returns an user" do
-        expect(users.body.first.keys).to eq(user_info)
+        expect(users.body.first.keys).to eq(USER_KEYS)
       end
     end
 
@@ -97,7 +74,7 @@ describe FreckleIO::Connection do
       end
 
       it "returns an user" do
-        expect(users.body.first.keys).to eq(user_info)
+        expect(users.body.first.keys).to eq(USER_KEYS)
       end
     end
 
@@ -107,7 +84,7 @@ describe FreckleIO::Connection do
       end
 
       it "returns an user" do
-        expect(users.body.first.keys).to eq(user_info)
+        expect(users.body.first.keys).to eq(USER_KEYS)
       end
     end
 
@@ -121,7 +98,7 @@ describe FreckleIO::Connection do
       end
 
       it "returns an user" do
-        expect(users.body.first.keys).to eq(user_info)
+        expect(users.body.first.keys).to eq(USER_KEYS)
       end
     end
 
