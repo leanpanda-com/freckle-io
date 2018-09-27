@@ -13,6 +13,8 @@ Gem::Specification.new do |spec|
   spec.license      = "MIT"
   spec.require_path = ["lib"]
 
+  spec.required_ruby_version = '>= 2.3.0'
+
   spec.files        = Dir["lib/**/*.rb"]
   spec.test_files   = Dir["spec/**/*.rb"]
 
