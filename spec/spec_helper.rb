@@ -26,7 +26,7 @@ require "webmock"
 require "dotenv"
 require "pry"
 
-Dotenv.load
+Dotenv.load(".env.test")
 
 RSpec.configure do |config|
   config.before(:all) do
