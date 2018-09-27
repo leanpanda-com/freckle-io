@@ -61,7 +61,7 @@ VCR.configure do |c|
 
   c.configure_rspec_metadata!
   c.default_cassette_options = {
-    match_requests_on: [:method, :uri, :query, :body]
+    match_requests_on: [:method, :query, :body]
   }
 
   c.filter_sensitive_data("<TOKEN>") { filter_api_token }
