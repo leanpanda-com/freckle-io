@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.authors      = ["Domenico Giuseppe Garofoli"]
   spec.email        = ["sirion1987@gmail.com"]
 
-  spec.summary      = "Yet another Ruby client for the Freekle API"
-  spec.description  = "Yet another Ruby client for the Freekle API"
+  spec.summary      = "Yet another Ruby client for the Freckle API"
+  spec.description  = "Yet another Ruby client for the Freckle API"
   spec.homepage     = "https://github.com/sirion1987/freckle-io"
   spec.license      = "MIT"
   spec.require_path = ["lib"]
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr"
   spec.add_development_dependency "webmock"
 
-  spec.add_runtime_dependency "dotenv-rails"
+  spec.add_runtime_dependency "dotenv"
   spec.add_runtime_dependency "faraday", ">= 0.15.2"
   spec.add_runtime_dependency "faraday_middleware", ">= 0.12"
   spec.add_runtime_dependency "typhoeus", "~> 0"
