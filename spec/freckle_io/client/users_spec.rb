@@ -1,5 +1,4 @@
 require_relative "../../spec_helper"
-require "pry"
 
 describe FreckleIO::Client::Users do
   context "with configuration", :vcr do

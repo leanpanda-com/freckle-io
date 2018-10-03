@@ -24,7 +24,6 @@ require "rspec"
 require "vcr"
 require "webmock"
 require "dotenv"
-require "pry"
 
 Dotenv.load(".env.test")
 

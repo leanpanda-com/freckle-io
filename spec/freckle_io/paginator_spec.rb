@@ -1,5 +1,4 @@
 require_relative "../spec_helper"
-require "pry"
 
 describe FreckleIO::Paginator do
   context "with configuration", :vcr do
