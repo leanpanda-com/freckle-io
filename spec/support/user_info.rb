@@ -1,21 +1,21 @@
-USER_KEYS = [
-  "id",
-  "email",
-  "first_name",
-  "last_name",
-  "profile_image_url",
-  "state",
-  "role",
-  "entries",
-  "expenses",
-  "created_at",
-  "updated_at",
-  "url",
-  "entries_url",
-  "expenses_url",
-  "activate_url",
-  "deactivate_url",
-  "give_access_to_projects_url",
-  "revoke_access_to_projects_url",
-  "revoke_access_to_all_projects_url"
-]
+USER_KEYS = %w(
+  id
+  email
+  first_name
+  last_name
+  profile_image_url
+  state
+  role
+  entries
+  expenses
+  created_at
+  updated_at
+  url
+  entries_url
+  expenses_url
+  activate_url
+  deactivate_url
+  give_access_to_projects_url
+  revoke_access_to_projects_url
+  revoke_access_to_all_projects_url
+).freeze

@@ -22,7 +22,7 @@ describe FreckleIO::Client::Users do
     end
 
     describe "#show" do
-      let(:result) { users.show(ENV['REAL_FRECKLE_USER_ID']) }
+      let(:result) { users.show(ENV["REAL_FRECKLE_USER_ID"]) }
 
       it "get a spacific user" do
         expect(result.body.keys).to eq(USER_KEYS)

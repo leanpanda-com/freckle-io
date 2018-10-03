@@ -81,18 +81,20 @@ module FreckleIO
     end
 
     def connection
-      options = {
+      @connection ||= Faraday.new(default_options) do |connection|
+        connection.request  :json
+        connection.response :json, content_type: /\bjson$/
+        connection.adapter  Faraday.default_adapter
+      end
+    end
+
+    def default_options
+      {
         url: FreckleIO.configuration.url,
         headers: {
           user_agent: "MyFreckleBot/1.0"
         }
       }
-
-      @connection ||= Faraday.new(options) do |connection|
-        connection.request  :json
-        connection.response :json, content_type: /\bjson$/
-        connection.adapter  Faraday.default_adapter
-      end
     end
   end
 end

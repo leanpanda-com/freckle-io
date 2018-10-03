@@ -38,18 +38,32 @@ module FreckleIO
     def pages
       @pages ||= begin
         raw_links.split(",").map do |link|
-          url, rel = link.split(";").map(&:strip)
-          rel = rel.gsub(/(rel=)?"/, "")
-          url = URI.parse(url[1..-2])
-          number_page = CGI.parse(url.query)["page"]
+          url, rel, number_page = split_and_clean_link(link)
 
           {
             url: "#{url.path}?#{url.query}",
             rel: rel,
-            number_page: number_page.first
+            number_page: number_page
           }
         end
       end
+    end
+
+    # Example of link response headers:
+    # "<https://api.letsfreckle.com/v2/users?page=2>; rel=\"last\""
+    #
+    # The first element is an URI. "Rel" means the relative position
+    # of the current page, in this case is last page.
+
+    def split_and_clean_link(link)
+      raw_url, rel = link.split(";").map(&:strip)
+
+      raw_url = raw_url.gsub(/<|>/, "")
+      rel = rel.gsub(/(rel=)?"/, "")
+      url = URI.parse(raw_url)
+      page = CGI.parse(url.query)["page"].first
+
+      [url, rel, page]
     end
   end
 end

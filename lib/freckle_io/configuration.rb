@@ -6,38 +6,15 @@ module FreckleIO
 
     DEFAULT_URL = "https://api.letsfreckle.com/v2".freeze
 
+    attr_writer :auth_type
     attr_writer :token
     attr_writer :url
-    attr_writer :auth_type
 
     def initialize
       @token = nil
-      @url = FreckleIO::Configuration::DEFAULT_URL
-    end
-
-    def token
-      unless @token
-        raise(
-          Errors::Configuration,
-          "FreckleIO token missing!"
-        )
-      end
-
-      @token
-    end
-
-    def url
-      @url
     end
 
     def auth_type
-      unless @auth_type
-        raise(
-          Errors::Configuration,
-          "FreckleIO authentication missing missing!"
-        )
-      end
-
       unless valid_auth?(@auth_type)
         raise(
           Errors::Configuration,
@@ -45,7 +22,15 @@ module FreckleIO
         )
       end
 
-      @auth_type
+      @auth_type || raise(Errors::Configuration, "Authentication type missing!")
+    end
+
+    def token
+      @token || raise(Errors::Configuration, "Token missing!")
+    end
+
+    def url
+      @url || self.class::DEFAULT_URL
     end
   end
 end

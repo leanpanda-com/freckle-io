@@ -32,7 +32,7 @@ describe FreckleIO::Connection do
 
     describe "#get" do
       context "with params" do
-        let(:users) { connection.get("/v2/users", params: { page: 2 }) }
+        let(:users) { connection.get("/v2/users", params: {page: 2}) }
 
         it "returns an array of users" do
           expect(users.body).to be_a Array
