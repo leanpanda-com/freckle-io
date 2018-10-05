@@ -16,7 +16,7 @@ class AnonymizeInteraction
     class_path = which_class
 
     if class_path
-      Kernel.const_get(which_class).new(interaction: interaction).call
+      Kernel.const_get(class_path).new(interaction: interaction).call
     else
       puts "Attention! Interaction #{request_url} isn't anonymize!"
     end
