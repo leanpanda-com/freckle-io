@@ -1,4 +1,4 @@
-module Anonimize
+module Anonymize
   class Users
     attr_accessor :interaction
 
@@ -35,7 +35,7 @@ module Anonimize
         match_texts = interaction.response.body.scan(regex)
 
         match_texts.each_with_index do |text, index|
-          replace = anonimize_response_value(key, index)
+          replace = anonymize_response_value(key, index)
           interaction.filter!(text.first, replace)
         end
       end
@@ -43,7 +43,7 @@ module Anonimize
       interaction
     end
 
-    def anonimize_response_value(key, index)
+    def anonymize_response_value(key, index)
       return "http://foo.com/#{index}" if key.to_s.include? "url"
 
       case key

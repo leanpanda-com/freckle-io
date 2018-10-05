@@ -50,23 +50,10 @@ VCR.configure do |c|
   c.filter_sensitive_data("<TOKEN>") { filter_api_token }
 
   c.before_record do |interaction|
-    AnonimizeInteraction.new(interaction: interaction).call
+    AnonymizeInteraction.new(interaction: interaction).call
   end
 end
 
 def filter_api_token
   ENV.fetch "FRECKLE_TOKEN", "freckle_token"
-end
-
-def anonimize_response_value(key, index)
-  return "http://foo.com/#{index}" if key.to_s.include? "url"
-
-  case key
-  when :id
-    index.to_s
-  when :mail
-    "#{key}_#{index}@domain.com"
-  else
-    "#{key}_#{index}"
-  end
 end

@@ -1,11 +1,11 @@
 require "cgi"
 require "uri"
 
-class AnonimizeInteraction
+class AnonymizeInteraction
   attr_reader :interaction
 
   PATH_TO_CLASS = [
-    {regex: %r{^\/v2\/users(\/\d+)?$}, klass: "Anonimize::Users"}
+    {regex: %r{^\/v2\/users(\/\d+)?$}, klass: "Anonymize::Users"}
   ].freeze
 
   def initialize(interaction:)
