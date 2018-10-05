@@ -50,14 +50,7 @@ VCR.configure do |c|
   c.filter_sensitive_data("<TOKEN>") { filter_api_token }
 
   c.before_record do |interaction|
-    USER_API_REPLACE_VALUES.each do |key, regex|
-      match_texts = interaction.response.body.scan(regex)
-
-      match_texts.each_with_index do |text, index|
-        replace = anonimize_response_value(key, index)
-        interaction.filter!(text.first, replace)
-      end
-    end
+    AnonimizeInteraction.new(interaction: interaction).call
   end
 end
 
