@@ -5,7 +5,7 @@ class AnonymizeInteraction
   attr_reader :interaction
 
   PATH_TO_CLASS = [
-    {regex: %r{^\/v2\/users(\/\d+)?$}, klass: "Anonymize::Users"}
+    {path: %r{^\/v2\/users(\/\d+)?$}, klass: "Anonymize::Users"}
   ].freeze
 
   def initialize(interaction:)
@@ -13,16 +13,22 @@ class AnonymizeInteraction
   end
 
   def call
-    Kernel.const_get(which_class).new(interaction: interaction).call
+    class_path = which_class
+
+    if class_path
+      Kernel.const_get(which_class).new(interaction: interaction).call
+    else
+      puts "Attention! Interaction #{request_url} isn't anonymize!"
+    end
   rescue StandardError
-    abort("No class found for #{request_url}")
+    abort("Undefined class for #{request_url} path")
   end
 
   private
 
   def which_class
     PATH_TO_CLASS.each do |path|
-      return path[:klass] if path[:regex].match(request_url)
+      return path[:klass] if path[:path].match(request_url)
     end
 
     nil
@@ -35,9 +41,5 @@ class AnonymizeInteraction
 
       uri.path
     end
-  end
-
-  def body
-    interaction.response.body
   end
 end
