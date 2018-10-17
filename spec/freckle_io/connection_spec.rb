@@ -1,5 +1,4 @@
 require_relative "../spec_helper"
-require "pry"
 
 describe FreckleIO::Connection do
   context "with configuration", :vcr do
@@ -12,7 +11,7 @@ describe FreckleIO::Connection do
     end
 
     let(:connection) { described_class.new }
-    let!(:users) { connection.get("/v2/users") }
+    let(:users) { connection.get("/v2/users") }
 
     describe "with header" do
       it "set user agent" do
@@ -27,6 +26,25 @@ describe FreckleIO::Connection do
         header_token = users.env.request_headers["X-FreckleToken"]
 
         expect(header_token).not_to be nil
+      end
+    end
+
+    describe "with invalid host" do
+      before do
+        FreckleIO.reset
+        FreckleIO.configure do |config|
+          config.token = ENV["FRECKLE_TOKEN"]
+          config.url = "http://not.existing.domain"
+          config.auth_type = :freckle_token
+        end
+      end
+
+      let(:invalid_request) { connection.get("/") }
+
+      it "raises a connection error for invalid host" do
+        expect do
+          invalid_request
+        end.to raise_error(FreckleIO::Errors::Connection::Failed)
       end
     end
 
@@ -52,9 +70,60 @@ describe FreckleIO::Connection do
           expect(users.body.first.keys).to eq(USER_KEYS)
         end
       end
+
+      context "with invalid url" do
+        let(:invalid_resource) { connection.get("/invalid_url") }
+
+        it "raises a resource not found error for invalid resource" do
+          expect do
+            invalid_resource
+          end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
+        end
+
+        it "raises a conncection failed error" do
+        end
+      end
+
+      context "with connection timeout" do
+        # https://github.com/lostisland/faraday/issues/561
+
+        let(:connection) { described_class.new }
+        let(:resource) do
+          connection.get("/v2/users", request_options: {timeout: 0})
+        end
+
+        it "raises a timeout error" do
+          expect do
+            resource
+          end.to raise_error(FreckleIO::Errors::Connection::Failed)
+        end
+      end
+
+      context "with connection open timeout" do
+        let(:connection) { described_class.new }
+        let(:resource) do
+          connection.get(
+            "/v2/users",
+            request_options: {
+              timeout: 0,
+              open_timeout: 0
+            }
+          )
+        end
+
+        it "raises a timeout error" do
+          expect do
+            resource
+          end.to raise_error(FreckleIO::Errors::Connection::Failed)
+        end
+      end
     end
 
     describe "#next" do
+      before do
+        users
+      end
+
       it "returns an array of users" do
         expect(connection.next.body).to be_a Array
       end
@@ -66,6 +135,7 @@ describe FreckleIO::Connection do
 
     describe "#prev" do
       before do
+        users
         connection.next
       end
 
@@ -79,6 +149,10 @@ describe FreckleIO::Connection do
     end
 
     describe "#last" do
+      before do
+        users
+      end
+
       it "returns an array of users" do
         expect(connection.last.body).to be_a Array
       end
@@ -90,6 +164,7 @@ describe FreckleIO::Connection do
 
     describe "#first" do
       before do
+        users
         connection.last
       end
 
@@ -103,6 +178,10 @@ describe FreckleIO::Connection do
     end
 
     describe "#total page" do
+      before do
+        users
+      end
+
       context "with first page" do
         it "returns the range of pages" do
           expect(connection.total_pages).to be_a Integer

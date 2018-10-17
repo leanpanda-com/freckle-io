@@ -1,5 +1,6 @@
 require "freckle_io/configuration"
 require "freckle_io/errors/configuration"
+require "freckle_io/errors/connection"
 require "freckle_io/connection"
 require "freckle_io/client/users"
 

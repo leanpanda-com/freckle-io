@@ -23,6 +23,7 @@ require "freckle_io"
 require "rspec"
 require "vcr"
 require "webmock"
+require "webmock/rspec"
 require "dotenv"
 
 Dotenv.load(".env.test")
@@ -38,9 +39,9 @@ RSpec.configure do |config|
 end
 
 VCR.configure do |c|
+  c.hook_into :webmock
   c.allow_http_connections_when_no_cassette = true
   c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
-  c.hook_into :webmock
 
   c.configure_rspec_metadata!
   c.default_cassette_options = {

@@ -7,19 +7,22 @@ module FreckleIO
   class Connection
     include FreckleIO::Authentication
 
-    attr_reader :body
     attr_reader :raw_links
 
-    def get(path, params: {})
+    def get(path, params: {}, request_options: {})
       response = connection.get do |request|
         authorize_request(request)
+        set_request_options(request, request_options)
         request.url path, params
       end
 
       @raw_links = response.headers["link"] || []
-      @body = response.body
 
       response
+    rescue Faraday::ConnectionFailed => e
+      raise FreckleIO::Errors::Connection::Failed.new(e), e.message
+    rescue Faraday::ResourceNotFound => e
+      raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
     end
 
     def all(path)
@@ -84,7 +87,8 @@ module FreckleIO
       @connection ||= Faraday.new(default_options) do |connection|
         connection.request  :json
         connection.response :json, content_type: /\bjson$/
-        connection.adapter  Faraday.default_adapter
+        connection.response :raise_error
+        connection.adapter  :net_http
       end
     end
 
@@ -95,6 +99,11 @@ module FreckleIO
           user_agent: "MyFreckleBot/1.0"
         }
       }
+    end
+
+    def set_request_options(request, options)
+      request.options.timeout = options[:timeout]
+      request.options.open_timeout = options[:open_timeout]
     end
   end
 end
