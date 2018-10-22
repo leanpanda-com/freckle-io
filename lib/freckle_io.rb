@@ -3,6 +3,7 @@ require "freckle_io/errors/configuration"
 require "freckle_io/errors/connection"
 require "freckle_io/connection"
 require "freckle_io/client/users"
+require "freckle_io/request/single_page"
 
 module FreckleIO
   def self.configuration

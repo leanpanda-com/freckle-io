@@ -7,16 +7,12 @@ module FreckleIO
   class Connection
     include FreckleIO::Authentication
 
-    attr_reader :raw_links
-
     def get(path, params: {}, request_options: {})
       response = connection.get do |request|
         authorize_request(request)
         set_request_options(request, request_options)
         request.url path, params
       end
-
-      @raw_links = response.headers["link"] || []
 
       response
     rescue Faraday::ConnectionFailed => e
@@ -41,47 +37,7 @@ module FreckleIO
       page
     end
 
-    def next
-      next? ? get(paginator.next) : nil
-    end
-
-    def next?
-      paginator.next
-    end
-
-    def prev
-      prev? ? get(paginator.prev) : nil
-    end
-
-    def prev?
-      paginator.prev
-    end
-
-    def last
-      last? ? get(paginator.last) : nil
-    end
-
-    def last?
-      paginator.last
-    end
-
-    def first
-      first? ? get(paginator.first) : nil
-    end
-
-    def first?
-      paginator.first
-    end
-
-    def total_pages
-      paginator.total_pages.to_i
-    end
-
     private
-
-    def paginator
-      @paginator = FreckleIO::Paginator.new(raw_links)
-    end
 
     def connection
       @connection ||= Faraday.new(default_options) do |connection|
