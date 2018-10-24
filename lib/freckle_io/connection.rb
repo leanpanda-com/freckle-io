@@ -2,6 +2,7 @@ require "freckle_io/authentication"
 require "freckle_io/paginator"
 require "faraday"
 require "faraday_middleware"
+require "faraday/"
 
 module FreckleIO
   class Connection
@@ -21,14 +22,18 @@ module FreckleIO
       raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
     end
 
-    def get_in_parallel(paths)
-      responses = connection.in_parallel do
-        paths.each do |path, params|
-          connection.get(path) do |request|
-            request.url path, params
+    def get_in_parallel(path, page_numbers)
+      responses = []
+
+      connection.in_parallel do
+        [2..page_numbers].each do |page|
+          responses << connection.get do |request|
+            request.url path, {page: page}
           end
         end
       end
+
+      responses
     end
 
     def all(path)

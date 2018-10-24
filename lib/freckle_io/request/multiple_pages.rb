@@ -21,14 +21,12 @@ module FreckleIO
         @first_page ||= first_single_page.get(path)
       end
 
-      def total_pages
-        @total_pages ||= @first_page.total_pages
+      def x(path)
+        @last_responses = client.get_in_parallel(path, total_pages)
       end
 
-      def x
-        (2..total_pages).map do |page|
-          ["path page = 1,2,3, ..:."]
-        end
+      def total_pages
+        @total_pages ||= @first_page.total_pages
       end
 
       def first_single_page
