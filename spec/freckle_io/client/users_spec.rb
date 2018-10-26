@@ -13,19 +13,28 @@ describe FreckleIO::Client::Users do
     let(:subject) { described_class.new }
 
     describe "#all" do
-      let(:result) { subject.all.last_response }
+      let(:results) { subject.all }
+      let(:first_response) { results.last_responses.first }
 
-      it "get all users" do
-        expect(result.body).to be_a(Array)
+      it "result must be a Request::MultiplePages" do
+        expect(results).to be_a(FreckleIO::Request::MultiplePages)
+      end
+
+      it "responses must be a Faraday::Response" do
+        expect(results.last_responses).to all(be_a(Faraday::Response))
+      end
+
+      it "an element of response must be a valid user" do
+        expect(first_response.body.first.keys).to eq(USER_KEYS)
       end
     end
 
     describe "#show" do
-      let(:user) { subject.show(ENV["REAL_FRECKLE_USER_ID"]) }
-      let(:result) { user.last_response }
+      let(:result) { subject.show(ENV["REAL_FRECKLE_USER_ID"]) }
+      let(:response) { result.last_response }
 
       it "get a spacific user" do
-        expect(result.body.keys).to eq(USER_KEYS)
+        expect(response.body.keys).to eq(USER_KEYS)
       end
     end
   end
