@@ -22,6 +22,7 @@ module FreckleIO
         )
 
         @last_responses.prepend([@first_response])
+        @last_responses.flatten!
       end
 
       def total_pages(path)
