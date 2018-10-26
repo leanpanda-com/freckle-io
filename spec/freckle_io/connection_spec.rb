@@ -48,6 +48,16 @@ describe FreckleIO::Connection do
       end
     end
 
+    describe "with too many request" do
+      # per_page = 1 raise Faraday::ClientError: the server responded
+      # with status 429 (Too Many Requests)
+      #
+      # HTTP/1.1 429 Too Many Requests
+      # Content-Type: text/html
+      # Retry-After: 3600
+      # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429
+    end
+
     describe "#get" do
       context "with params" do
         let(:users) { connection.get("/v2/users", params: {page: 2}) }

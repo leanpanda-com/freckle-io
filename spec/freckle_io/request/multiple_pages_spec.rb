@@ -19,6 +19,8 @@ describe FreckleIO::Request::MultiplePages do
 
       it "returns an array of users" do
         users
+
+        require "pry"; binding.pry
       end
     end
   end

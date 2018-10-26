@@ -2,7 +2,6 @@ require "freckle_io/authentication"
 require "freckle_io/paginator"
 require "faraday"
 require "faraday_middleware"
-require "faraday/"
 
 module FreckleIO
   class Connection
@@ -22,34 +21,21 @@ module FreckleIO
       raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
     end
 
-    def get_in_parallel(path, page_numbers)
+    def get_in_parallel(path, from_page_number, to_page_number, params: {})
       responses = []
 
       connection.in_parallel do
-        [2..page_numbers].each do |page|
-          responses << connection.get do |request|
-            request.url path, {page: page}
-          end
+        (from_page_number..to_page_number).each do |page|
+          responses << get(
+            path,
+            params: {
+              page: page
+            }.merge(params)
+          )
         end
       end
 
       responses
-    end
-
-    def all(path)
-      page = get(path)
-      page_body = page.env.body
-
-      loop do
-        break if !next?
-
-        next_page = self.next
-        next_response_headers = next_page.env.response_headers
-        page_body.concat(next_page.body) if next_page.body.is_a? Array
-        page.env.response_headers = next_response_headers
-      end
-
-      page
     end
 
     private
@@ -59,7 +45,7 @@ module FreckleIO
         connection.request  :json
         connection.response :json, content_type: /\bjson$/
         connection.response :raise_error
-        connection.adapter  :net_http
+        connection.adapter  :typhoeus
       end
     end
 
