@@ -1,5 +1,4 @@
 require "freckle_io/authentication"
-require "freckle_io/paginator"
 require "faraday"
 require "faraday_middleware"
 
@@ -27,10 +26,7 @@ module FreckleIO
       connection.in_parallel do
         (from_page_number..to_page_number).each do |page|
           responses << get(
-            path,
-            params: {
-              page: page
-            }.merge(params)
+            path, params: {page: page}.merge(params)
           )
         end
       end
