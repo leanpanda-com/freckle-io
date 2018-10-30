@@ -1,3 +1,5 @@
+require "freckle_io/paginator"
+
 module FreckleIO
   module Request
     class SinglePage
