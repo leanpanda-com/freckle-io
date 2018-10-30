@@ -17,10 +17,7 @@ describe FreckleIO::Request::MultiplePages do
     describe "#get" do
       let(:body_response) {}
 
-      it "returns an array of users" do
-        users
-
-        require "pry"; binding.pry
+      xit "returns an array of users" do
       end
     end
   end
