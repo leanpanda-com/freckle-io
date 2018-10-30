@@ -1,69 +1,104 @@
 require_relative "../spec_helper"
 
 describe FreckleIO::Paginator do
-  context "with configuration", :vcr do
-    before do
-      FreckleIO.reset
-      FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.auth_type = :freckle_token
-      end
+  let(:result) { described_class.new(raw_links) }
+
+  describe "#next" do
+    let(:raw_links) do
+      "<https://api.letsfreckle.com/v2/users?page=1>; rel=\"first\",\
+         <https://api.letsfreckle.com/v2/users?page=2>; rel=\"next\""
     end
 
-    let(:connection) { FreckleIO::Connection.new }
-    let(:request) { connection.get("/v2/users") }
+    it "returns link of next page" do
+      expect(result.next).to eq("/v2/users?page=2")
+    end
+  end
+
+  describe "#prev" do
+    let(:raw_links) do
+      "<https://api.letsfreckle.com/v2/users?page=1>; rel=\"prev\",\
+         <https://api.letsfreckle.com/v2/users?page=3>; rel=\"next\""
+    end
+
+    it "returns link of previous page" do
+      expect(result.prev).to eq("/v2/users?page=1")
+    end
+  end
+
+  describe "#last" do
+    let(:raw_links) do
+      "<https://api.letsfreckle.com/v2/users?page=1>; rel=\"prev\",\
+         <https://api.letsfreckle.com/v2/users?page=2>; rel=\"last\""
+    end
+
+    it "returns link of previous page" do
+      expect(result.last).to eq("/v2/users?page=2")
+    end
+  end
+
+  describe "#first" do
+    let(:raw_links) do
+      "<https://api.letsfreckle.com/v2/users?page=1>; rel=\"first\",\
+         <https://api.letsfreckle.com/v2/users?page=2>; rel=\"next\""
+    end
+
+    it "returns link of previous page" do
+      expect(result.first).to eq("/v2/users?page=1")
+    end
+  end
+
+  context "without nil raw links" do
+    let(:raw_links) { nil }
 
     describe "#next" do
-      before do
-        request
-        paginator.next
-      end
-
-      let(:paginator) { described_class.new(connection.raw_links) }
-
-      it "returns link of next page" do
-        expect(paginator.next).to eq("/v2/users?page=2")
+      it "return nil" do
+        expect(result.next).to eq(nil)
       end
     end
 
     describe "#prev" do
-      before do
-        request
-        connection.last
-        paginator.prev
-      end
-
-      let(:paginator) { described_class.new(connection.raw_links) }
-
-      it "returns link of previous page" do
-        expect(paginator.prev).to eq("/v2/users?page=1")
+      it "return nil" do
+        expect(result.prev).to eq(nil)
       end
     end
 
     describe "#last" do
-      before do
-        request
-        paginator.last
-      end
-
-      let(:paginator) { described_class.new(connection.raw_links) }
-
-      it "returns link of previous page" do
-        expect(paginator.last).to eq("/v2/users?page=2")
+      it "return nil" do
+        expect(result.last).to eq(nil)
       end
     end
 
     describe "#first" do
-      before do
-        request
-        connection.last
-        paginator.first
+      it "return nil" do
+        expect(result.first).to eq(nil)
       end
+    end
+  end
 
-      let(:paginator) { described_class.new(connection.raw_links) }
+  context "without void raw links" do
+    let(:raw_links) { "" }
 
-      it "returns link of previous page" do
-        expect(paginator.first).to eq("/v2/users?page=1")
+    describe "#next" do
+      it "return nil" do
+        expect(result.next).to eq(nil)
+      end
+    end
+
+    describe "#prev" do
+      it "return nil" do
+        expect(result.prev).to eq(nil)
+      end
+    end
+
+    describe "#last" do
+      it "return nil" do
+        expect(result.last).to eq(nil)
+      end
+    end
+
+    describe "#first" do
+      it "return nil" do
+        expect(result.first).to eq(nil)
       end
     end
   end

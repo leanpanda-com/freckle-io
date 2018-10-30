@@ -36,6 +36,8 @@ module FreckleIO
     end
 
     def pages
+      return {} if !raw_links || raw_links == ""
+
       @pages ||= begin
         raw_links.split(",").map do |link|
           url, rel, number_page = split_and_clean_link(link)
