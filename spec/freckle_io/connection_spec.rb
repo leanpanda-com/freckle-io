@@ -1,7 +1,7 @@
 require_relative "../spec_helper"
 
 describe FreckleIO::Connection do
-  context "with configuration", :vcr do
+  context "with default configuration", :vcr do
     before do
       FreckleIO.reset
       FreckleIO.configure do |config|
@@ -10,36 +10,83 @@ describe FreckleIO::Connection do
       end
     end
 
-    let(:connection) { described_class.new }
-    let(:users) { connection.get("/v2/users") }
+    let(:subject) { described_class.new }
+    let(:result) { subject.get("/v2/users") }
 
     describe "with header" do
-      it "set user agent" do
-        ua = users.env.request_headers["User-Agent"]
+      let(:ua) { result.env.request_headers["User-Agent"] }
 
+      it "set user agent" do
         expect(ua).to eq "MyFreckleBot/1.0"
       end
     end
 
     describe "with freckle token authentication" do
-      it "set X-FreckleToken" do
-        header_token = users.env.request_headers["X-FreckleToken"]
+      let(:header_token) { result.env.request_headers["X-FreckleToken"] }
 
+      it "set X-FreckleToken" do
         expect(header_token).not_to be nil
       end
     end
 
+    describe "with too many request" do
+      # per_page = 1 raise Faraday::ClientError: the server responded
+      # with status 429 (Too Many Requests)
+      #
+      # HTTP/1.1 429 Too Many Requests
+      # Content-Type: text/html
+      # Retry-After: 3600
+      # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429
+
+      xit "to implement"
+    end
+
+    describe "with page param" do
+      let(:result) { subject.get("/v2/users", params: {page: 2}) }
+
+      it "response must be success" do
+        expect(result.success?).to be(true)
+      end
+    end
+
+    describe "with per_page param" do
+      let(:per_page) { 8 }
+      let(:result) { subject.get("/v2/users", params: {per_page: per_page}) }
+
+      it "response must have per_page elements" do
+        expect(result.body.count).to eq(per_page)
+      end
+    end
+
+    describe "with invalid url" do
+      let(:invalid_resource) { subject.get("/invalid_url") }
+
+      it "raises a resource not found error for invalid resource" do
+        expect do
+          invalid_resource
+        end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
+      end
+    end
+  end
+
+  context "with exceptions" do
+    before do
+      FreckleIO.reset
+      FreckleIO.configure do |config|
+        config.token = ENV["FRECKLE_TOKEN"]
+        config.auth_type = :freckle_token
+      end
+    end
+
+    let(:subject) { described_class.new }
+    let(:invalid_request) { subject.get("/") }
+
     describe "with invalid host" do
       before do
-        FreckleIO.reset
-        FreckleIO.configure do |config|
-          config.token = ENV["FRECKLE_TOKEN"]
-          config.url = "http://not.existing.domain"
-          config.auth_type = :freckle_token
-        end
+        allow(Faraday).to receive(:new).once.and_raise(
+          Faraday::ConnectionFailed, "Connection failed"
+        )
       end
-
-      let(:invalid_request) { connection.get("/") }
 
       it "raises a connection error for invalid host" do
         expect do
@@ -48,154 +95,17 @@ describe FreckleIO::Connection do
       end
     end
 
-    describe "#get" do
-      context "with params" do
-        let(:users) { connection.get("/v2/users", params: {page: 2}) }
-
-        it "returns an array of users" do
-          expect(users.body).to be_a Array
-        end
-
-        it "returns an user" do
-          expect(users.body.first.keys).to eq(USER_KEYS)
-        end
-      end
-
-      context "without params" do
-        it "returns an array of users" do
-          expect(users.body).to be_a Array
-        end
-
-        it "returns an user" do
-          expect(users.body.first.keys).to eq(USER_KEYS)
-        end
-      end
-
-      context "with invalid url" do
-        let(:invalid_resource) { connection.get("/invalid_url") }
-
-        it "raises a resource not found error for invalid resource" do
-          expect do
-            invalid_resource
-          end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
-        end
-
-        it "raises a conncection failed error" do
-        end
-      end
-
-      context "with connection timeout" do
-        # https://github.com/lostisland/faraday/issues/561
-
-        let(:connection) { described_class.new }
-        let(:resource) do
-          connection.get("/v2/users", request_options: {timeout: 0})
-        end
-
-        it "raises a timeout error" do
-          expect do
-            resource
-          end.to raise_error(FreckleIO::Errors::Connection::Failed)
-        end
-      end
-
-      context "with connection open timeout" do
-        let(:connection) { described_class.new }
-        let(:resource) do
-          connection.get(
-            "/v2/users",
-            request_options: {
-              timeout: 0,
-              open_timeout: 0
-            }
-          )
-        end
-
-        it "raises a timeout error" do
-          expect do
-            resource
-          end.to raise_error(FreckleIO::Errors::Connection::Failed)
-        end
-      end
-    end
-
-    describe "#next" do
+    describe "with invalid resource" do
       before do
-        users
+        allow(Faraday).to receive(:new).once.and_raise(
+          Faraday::ResourceNotFound, "Resource not found"
+        )
       end
 
-      it "returns an array of users" do
-        expect(connection.next.body).to be_a Array
-      end
-
-      it "returns an user" do
-        expect(users.body.first.keys).to eq(USER_KEYS)
-      end
-    end
-
-    describe "#prev" do
-      before do
-        users
-        connection.next
-      end
-
-      it "returns an array of users" do
-        expect(connection.prev.body).to be_a Array
-      end
-
-      it "returns an user" do
-        expect(users.body.first.keys).to eq(USER_KEYS)
-      end
-    end
-
-    describe "#last" do
-      before do
-        users
-      end
-
-      it "returns an array of users" do
-        expect(connection.last.body).to be_a Array
-      end
-
-      it "returns an user" do
-        expect(users.body.first.keys).to eq(USER_KEYS)
-      end
-    end
-
-    describe "#first" do
-      before do
-        users
-        connection.last
-      end
-
-      it "returns an array of users" do
-        expect(connection.first.body).to be_a Array
-      end
-
-      it "returns an user" do
-        expect(users.body.first.keys).to eq(USER_KEYS)
-      end
-    end
-
-    describe "#total page" do
-      before do
-        users
-      end
-
-      context "with first page" do
-        it "returns the range of pages" do
-          expect(connection.total_pages).to be_a Integer
-        end
-      end
-
-      context "with other number of page" do
-        before do
-          connection.next
-        end
-
-        it "returns an empty array" do
-          expect(connection.total_pages).to eq(0)
-        end
+      it "raises a connection error for invalid host" do
+        expect do
+          invalid_request
+        end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
       end
     end
   end

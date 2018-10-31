@@ -36,6 +36,8 @@ RSpec.configure do |config|
       c.auth_type = :freckle_token
     end
   end
+
+  config.include_context "with raw links"
 end
 
 VCR.configure do |c|

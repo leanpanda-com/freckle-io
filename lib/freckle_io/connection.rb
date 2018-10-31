@@ -1,13 +1,10 @@
 require "freckle_io/authentication"
-require "freckle_io/paginator"
 require "faraday"
 require "faraday_middleware"
 
 module FreckleIO
   class Connection
     include FreckleIO::Authentication
-
-    attr_reader :raw_links
 
     def get(path, params: {}, request_options: {})
       response = connection.get do |request|
@@ -16,8 +13,6 @@ module FreckleIO
         request.url path, params
       end
 
-      @raw_links = response.headers["link"] || []
-
       response
     rescue Faraday::ConnectionFailed => e
       raise FreckleIO::Errors::Connection::Failed.new(e), e.message
@@ -25,70 +20,28 @@ module FreckleIO
       raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
     end
 
-    def all(path)
-      page = get(path)
-      page_body = page.env.body
+    def get_in_parallel(path, from_page_number, to_page_number, params: {})
+      responses = []
 
-      loop do
-        break if !next?
-
-        next_page = self.next
-        next_response_headers = next_page.env.response_headers
-        page_body.concat(next_page.body) if next_page.body.is_a? Array
-        page.env.response_headers = next_response_headers
+      connection.in_parallel do
+        (from_page_number..to_page_number).each do |page|
+          responses << get(
+            path, params: {page: page}.merge(params)
+          )
+        end
       end
 
-      page
-    end
-
-    def next
-      next? ? get(paginator.next) : nil
-    end
-
-    def next?
-      paginator.next
-    end
-
-    def prev
-      prev? ? get(paginator.prev) : nil
-    end
-
-    def prev?
-      paginator.prev
-    end
-
-    def last
-      last? ? get(paginator.last) : nil
-    end
-
-    def last?
-      paginator.last
-    end
-
-    def first
-      first? ? get(paginator.first) : nil
-    end
-
-    def first?
-      paginator.first
-    end
-
-    def total_pages
-      paginator.total_pages.to_i
+      responses
     end
 
     private
-
-    def paginator
-      @paginator = FreckleIO::Paginator.new(raw_links)
-    end
 
     def connection
       @connection ||= Faraday.new(default_options) do |connection|
         connection.request  :json
         connection.response :json, content_type: /\bjson$/
         connection.response :raise_error
-        connection.adapter  :net_http
+        connection.adapter  :typhoeus
       end
     end
 

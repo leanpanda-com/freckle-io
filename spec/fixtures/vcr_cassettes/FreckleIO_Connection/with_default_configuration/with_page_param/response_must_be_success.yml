@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.letsfreckle.com/v2/users?page=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - MyFreckleBot/1.0
+      X-Freckletoken:
+      - "<TOKEN>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 30 Oct 2018 18:01:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '7488'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      X-Frame-Options:
+      - SAMEORIGIN
+      Link:
+      - <https://api.letsfreckle.com/v2/users?page=1>; rel="first", <https://api.letsfreckle.com/v2/users?page=1>;
+        rel="prev"
+      X-Runtime:
+      - '155'
+      Vary:
+      - Origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+    body:
+      encoding: UTF-8
+      string: '[{"id":0,"email":"mail_0@domain.com","first_name":"first_name_0","last_name":"last_name_0","profile_image_url":"http://foo.com/0","state":"active","role":"coworker","entries":623,"expenses":0,"created_at":"2017-05-08T12:16:32Z","updated_at":"2018-10-28T09:41:23Z","url":"http://foo.com/0","entries_url":"http://foo.com/0","expenses_url":"http://foo.com/0/expenses","activate_url":"http://foo.com/0","deactivate_url":"http://foo.com/0","give_access_to_projects_url":"http://foo.com/0","revoke_access_to_projects_url":"http://foo.com/0","revoke_access_to_all_projects_url":"http://foo.com/0"},{"id":1,"email":"mail_1@domain.com","first_name":"first_name_1","last_name":"last_name_1","profile_image_url":"","state":"active","role":"coworker","entries":464,"expenses":0,"created_at":"2017-05-28T14:40:10Z","updated_at":"2018-10-29T08:52:20Z","url":"http://foo.com/1","entries_url":"http://foo.com/1","expenses_url":"http://foo.com/1/expenses","activate_url":"http://foo.com/1","deactivate_url":"http://foo.com/1","give_access_to_projects_url":"http://foo.com/1","revoke_access_to_projects_url":"http://foo.com/1","revoke_access_to_all_projects_url":"http://foo.com/1"},{"id":2,"email":"mail_2@domain.com","first_name":"first_name_2","last_name":"last_name_2","profile_image_url":"","state":"active","role":"coworker","entries":432,"expenses":0,"created_at":"2017-10-04T10:17:01Z","updated_at":"2018-10-29T17:25:38Z","url":"http://foo.com/2","entries_url":"http://foo.com/2","expenses_url":"http://foo.com/2/expenses","activate_url":"http://foo.com/2","deactivate_url":"http://foo.com/2","give_access_to_projects_url":"http://foo.com/2","revoke_access_to_projects_url":"http://foo.com/2","revoke_access_to_all_projects_url":"http://foo.com/2"},{"id":3,"email":"mail_3@domain.com","first_name":"first_name_3","last_name":"last_name_3","profile_image_url":"http://foo.com/3","state":"active","role":"coworker","entries":568,"expenses":0,"created_at":"2018-01-11T00:43:25Z","updated_at":"2018-10-29T22:29:06Z","url":"http://foo.com/3","entries_url":"http://foo.com/3","expenses_url":"http://foo.com/3/expenses","activate_url":"http://foo.com/3","deactivate_url":"http://foo.com/3","give_access_to_projects_url":"http://foo.com/3","revoke_access_to_projects_url":"http://foo.com/3","revoke_access_to_all_projects_url":"http://foo.com/3"},{"id":4,"email":"mail_4@domain.com","first_name":"first_name_4","last_name":"last_name_4","profile_image_url":"http://foo.com/4","state":"active","role":"coworker","entries":441,"expenses":0,"created_at":"2018-01-11T00:44:26Z","updated_at":"2018-10-29T06:35:34Z","url":"http://foo.com/4","entries_url":"http://foo.com/4","expenses_url":"http://foo.com/4/expenses","activate_url":"http://foo.com/4","deactivate_url":"http://foo.com/4","give_access_to_projects_url":"http://foo.com/4","revoke_access_to_projects_url":"http://foo.com/4","revoke_access_to_all_projects_url":"http://foo.com/4"},{"id":5,"email":"mail_5@domain.com","first_name":"first_name_5","last_name":"last_name_5","profile_image_url":"","state":"disabled","role":"coworker","entries":55,"expenses":0,"created_at":"2018-03-08T10:43:15Z","updated_at":"2018-08-13T07:13:04Z","url":"http://foo.com/5","entries_url":"http://foo.com/5","expenses_url":"http://foo.com/5/expenses","activate_url":"http://foo.com/5","deactivate_url":"http://foo.com/5","give_access_to_projects_url":"http://foo.com/5","revoke_access_to_projects_url":"http://foo.com/5","revoke_access_to_all_projects_url":"http://foo.com/5"},{"id":6,"email":"mail_6@domain.com","first_name":"first_name_6","last_name":"last_name_6","profile_image_url":"","state":"active","role":"coworker","entries":216,"expenses":0,"created_at":"2018-03-13T10:04:08Z","updated_at":"2018-07-09T06:12:15Z","url":"http://foo.com/6","entries_url":"http://foo.com/6","expenses_url":"http://foo.com/6/expenses","activate_url":"http://foo.com/6","deactivate_url":"http://foo.com/6","give_access_to_projects_url":"http://foo.com/6","revoke_access_to_projects_url":"http://foo.com/6","revoke_access_to_all_projects_url":"http://foo.com/6"},{"id":7,"email":"mail_7@domain.com","first_name":"first_name_7","last_name":"last_name_7","profile_image_url":"","state":"active","role":"coworker","entries":265,"expenses":0,"created_at":"2018-06-01T14:11:55Z","updated_at":"2018-10-29T10:41:03Z","url":"http://foo.com/7","entries_url":"http://foo.com/7","expenses_url":"http://foo.com/7/expenses","activate_url":"http://foo.com/7","deactivate_url":"http://foo.com/7","give_access_to_projects_url":"http://foo.com/7","revoke_access_to_projects_url":"http://foo.com/7","revoke_access_to_all_projects_url":"http://foo.com/7"}]'
+    http_version: 
+  recorded_at: Tue, 30 Oct 2018 18:01:06 GMT
+recorded_with: VCR 4.0.0
