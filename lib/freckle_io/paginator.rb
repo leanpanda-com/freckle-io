@@ -38,7 +38,7 @@ module FreckleIO
     def pages
       return {} if !raw_links || raw_links == ""
 
-      @pages ||= begin
+      @pages ||=
         raw_links.split(",").map do |link|
           url, rel, number_page = split_and_clean_link(link)
 
@@ -48,7 +48,6 @@ module FreckleIO
             number_page: number_page
           }
         end
-      end
     end
 
     # Example of link response headers:

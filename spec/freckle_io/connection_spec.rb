@@ -14,7 +14,7 @@ describe FreckleIO::Connection do
     let(:result) { subject.get("/v2/users") }
 
     describe "with header" do
-      let (:ua) { result.env.request_headers["User-Agent"] }
+      let(:ua) { result.env.request_headers["User-Agent"] }
 
       it "set user agent" do
         expect(ua).to eq "MyFreckleBot/1.0"
@@ -37,6 +37,8 @@ describe FreckleIO::Connection do
       # Content-Type: text/html
       # Retry-After: 3600
       # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429
+
+      xit "to implement"
     end
 
     describe "with page param" do

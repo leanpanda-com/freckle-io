@@ -1,6 +1,5 @@
 require_relative "../../spec_helper"
 
-
 describe FreckleIO::Request::MultiplePages do
   context "with configuration", :vcr do
     before do

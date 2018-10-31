@@ -46,7 +46,7 @@ describe FreckleIO::Request::SinglePage do
       end
 
       it "previous page is a SinglePage" do
-        expect(next_users.prev).to be_a FreckleIO::Request::SinglePage
+        expect(next_users.prev).to be_a described_class
       end
     end
 
@@ -67,7 +67,7 @@ describe FreckleIO::Request::SinglePage do
       end
 
       it "next page is a SinglePage" do
-        expect(prev_users.next).to be_a FreckleIO::Request::SinglePage
+        expect(prev_users.next).to be_a described_class
       end
 
       context "when get prev page from the first page" do
@@ -125,7 +125,7 @@ describe FreckleIO::Request::SinglePage do
       end
 
       it "next page should be a SinglePage" do
-        expect(first_users.next).to be_a FreckleIO::Request::SinglePage
+        expect(first_users.next).to be_a described_class
       end
 
       context "when get last page from the first page" do

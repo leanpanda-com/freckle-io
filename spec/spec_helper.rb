@@ -37,7 +37,7 @@ RSpec.configure do |config|
     end
   end
 
-  config.include_context "Raw links"
+  config.include_context "with raw links"
 end
 
 VCR.configure do |c|
