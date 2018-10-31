@@ -65,55 +65,45 @@ describe FreckleIO::Connection do
         end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
       end
     end
+  end
 
-    describe "with connection timeout" do
-      # @TODO: Typhoeus, don't raise connection timeout!!!
-
-      let(:timeout_result) do
-        subject.get("/v2/users", request_options: {timeout: 0})
-      end
-
-      xit "raises a timeout error" do
-        expect do
-          timeout_result
-        end.to raise_error(FreckleIO::Errors::Connection::Failed)
+  context "with exceptions" do
+    before do
+      FreckleIO.reset
+      FreckleIO.configure do |config|
+        config.token = ENV["FRECKLE_TOKEN"]
+        config.auth_type = :freckle_token
       end
     end
 
-    describe "with connection open timeout" do
-      let(:result) do
-        subject.get(
-          "/v2/users",
-          request_options: {timeout: 0, open_timeout: 0}
+    let(:subject) { described_class.new }
+    let(:invalid_request) { subject.get("/") }
+
+    describe "with invalid host" do
+      before do
+        allow(Faraday).to receive(:new).once.and_raise(
+          Faraday::ConnectionFailed, "Connection failed"
         )
       end
 
-      xit "raises a connection failed" do
-        expect do
-          result
-        end.to raise_error(FreckleIO::Errors::Connection::Failed)
-      end
-    end
-  end
-
-  context "with wrong endpoint" do
-    describe "with invalid host" do
-      before do
-        FreckleIO.reset
-        FreckleIO.configure do |config|
-          config.token = ENV["FRECKLE_TOKEN"]
-          config.url = "http://not.existing.domain"
-          config.auth_type = :freckle_token
-        end
-      end
-
-      let(:subject) { described_class.new }
-      let(:invalid_request) { subject.get("/") }
-
-      xit "raises a connection error for invalid host" do
+      it "raises a connection error for invalid host" do
         expect do
           invalid_request
         end.to raise_error(FreckleIO::Errors::Connection::Failed)
+      end
+    end
+
+    describe "with invalid resource" do
+      before do
+        allow(Faraday).to receive(:new).once.and_raise(
+          Faraday::ResourceNotFound, "Resource not found"
+        )
+      end
+
+      it "raises a connection error for invalid host" do
+        expect do
+          invalid_request
+        end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
       end
     end
   end
