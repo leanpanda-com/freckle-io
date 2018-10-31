@@ -23,6 +23,10 @@ describe FreckleIO::Request::SinglePage do
       it "returns an user" do
         expect(body_response.first.keys).to eq(USER_KEYS)
       end
+
+      it "returns correct raw links for the first page" do
+        expect(users.raw_links).to eq first_page
+      end
     end
 
     describe "#next" do
@@ -91,6 +95,10 @@ describe FreckleIO::Request::SinglePage do
 
       it "next page should be nil" do
         expect(last_users.next).to be nil
+      end
+
+      it "returns correct raw links for the last page" do
+        expect(users.raw_links).to eq last_page
       end
 
       context "when get prev page from the last page" do
