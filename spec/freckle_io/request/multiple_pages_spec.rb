@@ -12,12 +12,19 @@ describe FreckleIO::Request::MultiplePages do
     end
 
     let(:subject) { described_class.new }
-    let(:users) { subject.get("/v2/users") }
+    let(:result) { subject.get("/v2/users") }
 
     describe "#get" do
-      let(:body_response) {}
+      let(:last_responses) { result.last_responses }
 
-      xit "returns an array of users" do
+      it "returns an array of faraday response" do
+        expect(last_responses).to all(be_a(Faraday::Response))
+      end
+
+      it "returns an user for each response" do
+        last_responses.each do |last_response|
+          expect(last_response.body.first.keys).to eq USER_KEYS
+        end
       end
     end
   end
