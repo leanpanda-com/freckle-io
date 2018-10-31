@@ -51,4 +51,4 @@ $ bundle exec rspec
 
 # Compatibility
 
-This client is set for work with the version 2 (v2) of teh Freckle API.
+This client is set for work with the version 2 (v2) of the Freckle API.
