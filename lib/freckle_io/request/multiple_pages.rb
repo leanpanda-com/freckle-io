@@ -23,7 +23,7 @@ module FreckleIO
           params: merged_params
         )
 
-        @last_responses.prepend([@first_response])
+        @last_responses.unshift([@first_response])
         @last_responses.flatten!
       end
 
