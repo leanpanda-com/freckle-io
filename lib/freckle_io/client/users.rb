@@ -3,8 +3,8 @@ module FreckleIO
     class Users
       USER_ENDPOINT = "/v2/users".freeze
 
-      def all
-        multiple_pages.get(USER_ENDPOINT)
+      def all(params: {})
+        multiple_pages.get(USER_ENDPOINT, params: params)
       end
 
       def show(id)

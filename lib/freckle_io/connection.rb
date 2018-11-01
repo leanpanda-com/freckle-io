@@ -20,7 +20,13 @@ module FreckleIO
       raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
     end
 
-    def get_in_parallel(path, from_page_number, to_page_number, params: {})
+    def get_in_parallel(
+      path,
+      from_page_number,
+      to_page_number,
+      params: {},
+      request_options: {}
+    )
       responses = []
 
       connection.in_parallel do
