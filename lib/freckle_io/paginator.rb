@@ -36,7 +36,7 @@ module FreckleIO
     end
 
     def pages
-      return {} if !raw_links || raw_links == ""
+      return {} if raw_links == "" || raw_links.empty?
 
       @pages ||=
         raw_links.split(",").map do |link|

@@ -47,8 +47,8 @@ describe FreckleIO::Paginator do
     end
   end
 
-  context "without nil raw links" do
-    let(:raw_links) { nil }
+  context "without void raw links" do
+    let(:raw_links) { "" }
 
     describe "#next" do
       it "return nil" do
@@ -75,8 +75,8 @@ describe FreckleIO::Paginator do
     end
   end
 
-  context "without void raw links" do
-    let(:raw_links) { "" }
+  context "without empty array raw links" do
+    let(:raw_links) { [] }
 
     describe "#next" do
       it "return nil" do
