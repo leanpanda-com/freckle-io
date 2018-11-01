@@ -18,6 +18,8 @@ module FreckleIO
       raise FreckleIO::Errors::Connection::Failed.new(e), e.message
     rescue Faraday::ResourceNotFound => e
       raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
+    rescue Faraday::ClientError => e
+      raise FreckleIO::Errors::Connection::ClientError.new(e), e.message
     end
 
     def get_in_parallel(

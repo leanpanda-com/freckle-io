@@ -108,5 +108,19 @@ describe FreckleIO::Connection do
         end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
       end
     end
+
+    describe "with client error" do
+      before do
+        allow(Faraday).to receive(:new).once.and_raise(
+          Faraday::ClientError, "Client error"
+        )
+      end
+
+      it "raises a connection error for invalid host" do
+        expect do
+          invalid_request
+        end.to raise_error(FreckleIO::Errors::Connection::ClientError)
+      end
+    end
   end
 end
