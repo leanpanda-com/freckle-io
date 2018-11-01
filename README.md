@@ -1,6 +1,7 @@
 # freckle-io
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/051732f42b5e59d60a5a/maintainability)](https://codeclimate.com/github/sirion1987/Freckle-io/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/051732f42b5e59d60a5a/test_coverage)](https://codeclimate.com/github/sirion1987/Freckle-io/test_coverage)
 
 Yet another Ruby client for the Freckle API
 
