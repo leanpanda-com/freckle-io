@@ -6,6 +6,7 @@ module FreckleIO
   class Connection
     include FreckleIO::Authentication
 
+    # rubocop:disable Metrics/MethodLength
     def get(path, params: {}, request_options: {})
       response = connection.get do |request|
         authorize_request(request)
@@ -21,6 +22,7 @@ module FreckleIO
     rescue Faraday::ClientError => e
       raise FreckleIO::Errors::Connection::ClientError.new(e), e.message
     end
+    # rubocop:enable Metrics/MethodLength
 
     def get_in_parallel(
       path,
@@ -33,8 +35,10 @@ module FreckleIO
 
       connection.in_parallel do
         (from_page_number..to_page_number).each do |page|
+          merged_params = {page: page}.merge(params)
+
           responses << get(
-            path, params: {page: page}.merge(params)
+            path, params: merged_params, request_options: request_options
           )
         end
       end
