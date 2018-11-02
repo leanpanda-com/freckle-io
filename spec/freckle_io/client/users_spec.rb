@@ -36,6 +36,10 @@ describe FreckleIO::Client::Users do
       it "get a spacific user" do
         expect(response.body.keys).to eq(USER_KEYS)
       end
+
+      it "raw links should be a empty array" do
+        expect(result.raw_links).to be_empty
+      end
     end
   end
 end
