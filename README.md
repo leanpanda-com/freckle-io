@@ -1,5 +1,6 @@
 # freckle-io
 
+[![Build Status](https://travis-ci.com/sirion1987/freckle-io.svg?branch=master)](https://travis-ci.com/sirion1987/freckle-io)
 [![Maintainability](https://api.codeclimate.com/v1/badges/051732f42b5e59d60a5a/maintainability)](https://codeclimate.com/github/sirion1987/Freckle-io/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/051732f42b5e59d60a5a/test_coverage)](https://codeclimate.com/github/sirion1987/Freckle-io/test_coverage)
 
