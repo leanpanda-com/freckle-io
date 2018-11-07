@@ -67,6 +67,12 @@ describe FreckleIO::Connection do
         end.to raise_error(FreckleIO::Errors::Connection::ResourceNotFound)
       end
     end
+
+    describe "with a valid response" do
+      it "must be a json format" do
+        expect(result.env.response_headers["Content-Type"]).to eq("application/json; charset=utf-8")
+      end
+    end
   end
 
   context "with exceptions" do
