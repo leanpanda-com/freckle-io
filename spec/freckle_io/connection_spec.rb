@@ -70,7 +70,9 @@ describe FreckleIO::Connection do
 
     describe "with a valid response" do
       it "must be a json format" do
-        expect(result.env.response_headers["Content-Type"]).to eq("application/json; charset=utf-8")
+        expect(result.env.response_headers["Content-Type"]).to eq(
+          "application/json; charset=utf-8"
+        )
       end
     end
   end

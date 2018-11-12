@@ -19,8 +19,6 @@ module FreckleIO
       private
 
       def retrieve_all_pages
-        merged_params =
-
         @last_responses ||= client.get_in_parallel(
           path,
           2,
