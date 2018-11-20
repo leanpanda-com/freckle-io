@@ -3,7 +3,7 @@ module FreckleIO
     class Users
       USER_ENDPOINT = "/v2/users".freeze
       ALLOWED_KEYS = %i(name).freeze
-      VALIDATOR = FreckleIO::Validator::User
+      VALIDATOR = Validator::User
 
       def all(params = {})
         multiple_pages.get(USER_ENDPOINT, params: user_params(params))

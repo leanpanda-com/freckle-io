@@ -16,11 +16,11 @@ module FreckleIO
 
       response
     rescue Faraday::ConnectionFailed => e
-      raise FreckleIO::Errors::Connection::Failed.new(e), e.message
+      raise Errors::Connection::Failed.new(e), e.message
     rescue Faraday::ResourceNotFound => e
-      raise FreckleIO::Errors::Connection::ResourceNotFound.new(e), e.message
+      raise Errors::Connection::ResourceNotFound.new(e), e.message
     rescue Faraday::ClientError => e
-      raise FreckleIO::Errors::Connection::ClientError.new(e), e.message
+      raise Errors::Connection::ClientError.new(e), e.message
     end
     # rubocop:enable Metrics/MethodLength
 

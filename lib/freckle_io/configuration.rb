@@ -2,7 +2,7 @@ require "freckle_io/authentication"
 
 module FreckleIO
   class Configuration
-    include FreckleIO::Authentication
+    include Authentication
 
     DEFAULT_URL = "https://api.letsfreckle.com/v2".freeze
 

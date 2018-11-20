@@ -62,11 +62,11 @@ module FreckleIO
       private
 
       def paginator
-        @paginator = FreckleIO::Paginator.new(raw_links)
+        @paginator = Paginator.new(raw_links)
       end
 
       def client
-        @client = FreckleIO::Connection.new
+        @client = Connection.new
       end
     end
   end

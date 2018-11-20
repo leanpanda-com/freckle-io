@@ -45,11 +45,11 @@ module FreckleIO
       end
 
       def first_single_page
-        @first_single_page ||= FreckleIO::Request::SinglePage.new
+        @first_single_page ||= SinglePage.new
       end
 
       def client
-        @client ||= FreckleIO::Connection.new
+        @client ||= Connection.new
       end
 
       def default_params

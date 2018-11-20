@@ -5,7 +5,7 @@ module FreckleIO
         Dry::Validation.Schema do
           configure do
             config.messages_file = "lib/freckle_io/validator/validation.yml"
-            predicates(FreckleIO::Validator::RestrictedHash)
+            predicates(RestrictedHash)
 
             option :allowed_keys
           end
