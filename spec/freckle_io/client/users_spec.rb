@@ -41,5 +41,37 @@ describe FreckleIO::Client::Users do
         expect(result.raw_links).to be_empty
       end
     end
+
+    describe "with valid params" do
+      let(:params) do
+        {
+          name: "valid_string"
+        }
+      end
+
+      let(:results) { subject.all(params) }
+
+      it "params should be valid" do
+        expect do
+          results
+        end.not_to raise_error
+      end
+    end
+
+    describe "with unknow params" do
+      let(:params) do
+        {
+          invalid_params: "oh! oh!"
+        }
+      end
+
+      let(:results) { subject.all(params) }
+
+      it "raises a invalid params error" do
+        expect do
+          results
+        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      end
+    end
   end
 end
