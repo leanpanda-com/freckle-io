@@ -1,0 +1,3 @@
+en:
+  errors:
+    restricted_hash?: "has unknown keys. Allowed keys are: { name }"
