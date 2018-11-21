@@ -27,10 +27,10 @@ module FreckleIO
     end
 
     def validator
-      @validator ||= get_validator_module.validation(params, allowed_keys)
+      @validator ||= which_validator_module.validation(params, allowed_keys)
     end
 
-    def get_validator_module
+    def which_validator_module
       Kernel.const_get(validator_module)
     end
   end
