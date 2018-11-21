@@ -17,7 +17,7 @@ module FreckleIO
     def call
       return validator.output if valid?
 
-      raise Errors::Params::InvalidParams.new, validator.messages.join(",")
+      raise Errors::Params::InvalidParams.new, validator_messages
     end
 
     private
@@ -32,6 +32,13 @@ module FreckleIO
 
     def which_validator_module
       Kernel.const_get(validator_module)
+    end
+
+    def validator_messages
+      messages = validator.messages(full: true)
+      return messages.values.join(",") if messages.is_a?(Hash)
+
+      messages.join(",")
     end
   end
 end

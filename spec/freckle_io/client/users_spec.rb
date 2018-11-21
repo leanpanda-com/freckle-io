@@ -45,7 +45,10 @@ describe FreckleIO::Client::Users do
     describe "with valid params" do
       let(:params) do
         {
-          name: "valid_string"
+          name: "valid_string",
+          email: "email@domain.com",
+          role: "coworker",
+          state: "active"
         }
       end
 
@@ -62,6 +65,54 @@ describe FreckleIO::Client::Users do
       let(:params) do
         {
           invalid_params: "oh! oh!"
+        }
+      end
+
+      let(:results) { subject.all(params) }
+
+      it "raises a invalid params error" do
+        expect do
+          results
+        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      end
+    end
+
+    describe "with wrong email" do
+      let(:params) do
+        {
+          email: "invalid_email"
+        }
+      end
+
+      let(:results) { subject.all(params) }
+
+      it "raises a invalid params error" do
+        expect do
+          results
+        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      end
+    end
+
+    describe "with wrong role" do
+      let(:params) do
+        {
+          role: "invalid_role"
+        }
+      end
+
+      let(:results) { subject.all(params) }
+
+      it "raises a invalid params error" do
+        expect do
+          results
+        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      end
+    end
+
+    describe "with state role" do
+      let(:params) do
+        {
+          state: "invalid_state"
         }
       end
 

@@ -2,7 +2,7 @@ module FreckleIO
   module Client
     class Users
       USER_ENDPOINT = "/v2/users".freeze
-      ALLOWED_KEYS = %i(name).freeze
+      ALLOWED_KEYS = %i(name email role state).freeze
       VALIDATOR_MODULE = "FreckleIO::Validator::User".freeze
 
       def all(params = {})
