@@ -2,16 +2,16 @@ module FreckleIO
   class Params
     attr_reader :params
     attr_reader :allowed_keys
-    attr_reader :validator_class
+    attr_reader :validator_module
 
     def initialize(
       params,
       allowed_keys,
-      validator_class
+      validator_module
     )
       @params = params
       @allowed_keys = allowed_keys
-      @validator_class = validator_class
+      @validator_module = validator_module
     end
 
     def call
@@ -27,7 +27,11 @@ module FreckleIO
     end
 
     def validator
-      @validator ||= validator_class.validation(params, allowed_keys)
+      @validator ||= get_validator_module.validation(params, allowed_keys)
+    end
+
+    def get_validator_module
+      Kernel.const_get(validator_module)
     end
   end
 end
