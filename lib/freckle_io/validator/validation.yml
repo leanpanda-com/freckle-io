@@ -1,3 +1,5 @@
 en:
   errors:
-    restricted_hash?: "has unknown keys. Allowed keys are: { name }"
+    rules:
+      user:
+        restricted_hash?: "has unknown keys. Allowed keys are: name, email, role and state."
