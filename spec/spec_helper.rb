@@ -38,6 +38,9 @@ RSpec.configure do |config|
   end
 
   config.include_context "with raw links"
+  config.expect_with :rspec do |expectations|
+    expectations.syntax = :expect
+  end
 end
 
 VCR.configure do |c|
