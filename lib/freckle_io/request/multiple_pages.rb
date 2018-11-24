@@ -9,7 +9,7 @@ module FreckleIO
 
       def get(path, params: {})
         @path ||= path
-        @params ||= default_params.merge(params)
+        @params ||= default_params.merge(params).compact
 
         retrieve_all_pages
 
@@ -54,7 +54,7 @@ module FreckleIO
 
       def default_params
         {
-          per_page: 10
+          per_page: FreckleIO.configuration.per_page
         }
       end
     end

@@ -9,6 +9,7 @@ module FreckleIO
     attr_writer :auth_type
     attr_writer :token
     attr_writer :url
+    attr_writer :per_page
 
     def initialize
       @token = nil
@@ -31,6 +32,10 @@ module FreckleIO
 
     def url
       @url || self.class::DEFAULT_URL
+    end
+
+    def per_page
+      @per_page || nil
     end
   end
 end

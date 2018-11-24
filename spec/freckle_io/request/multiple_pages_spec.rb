@@ -12,6 +12,7 @@ describe FreckleIO::Request::MultiplePages do
 
     let(:subject) { described_class.new }
     let(:result) { subject.get("/v2/users") }
+    let(:default_per_page) { 30 }
 
     describe "#get" do
       let(:last_responses) { result.last_responses }
@@ -24,6 +25,32 @@ describe FreckleIO::Request::MultiplePages do
         last_responses.each do |last_response|
           expect(last_response.body.first.keys).to eq USER_KEYS
         end
+      end
+
+      it "returns freckle default per page elements" do
+        expect(last_responses.first.body.count).to eq(default_per_page)
+      end
+    end
+  end
+
+  context "with per page", :vcr do
+    before do
+      FreckleIO.reset
+      FreckleIO.configure do |config|
+        config.token = ENV["FRECKLE_TOKEN"]
+        config.auth_type = :freckle_token
+        config.per_page = per_page
+      end
+    end
+
+    let(:per_page) { 19 }
+    let(:result) { subject.get("/v2/users") }
+
+    describe "#get" do
+      let(:last_responses) { result.last_responses }
+
+      it "return per page number elements" do
+        expect(last_responses.first.body.count).to eq(per_page)
       end
     end
   end
