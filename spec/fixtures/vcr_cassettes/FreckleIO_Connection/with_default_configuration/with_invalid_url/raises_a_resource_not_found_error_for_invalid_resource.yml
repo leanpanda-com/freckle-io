@@ -11,6 +11,8 @@ http_interactions:
       - MyFreckleBot/1.0
       X-Freckletoken:
       - "<TOKEN>"
+      Expect:
+      - ''
   response:
     status:
       code: 404
@@ -19,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 30 Oct 2018 18:01:06 GMT
+      - Sat, 24 Nov 2018 10:07:02 GMT
       Content-Type:
       - text/html; charset=utf-8
       Content-Length:
@@ -34,5 +36,5 @@ http_interactions:
       encoding: UTF-8
       string: " "
     http_version: 
-  recorded_at: Tue, 30 Oct 2018 18:01:06 GMT
+  recorded_at: Sat, 24 Nov 2018 10:07:02 GMT
 recorded_with: VCR 4.0.0

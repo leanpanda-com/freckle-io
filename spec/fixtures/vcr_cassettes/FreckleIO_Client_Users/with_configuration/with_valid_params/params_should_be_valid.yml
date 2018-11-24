@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.letsfreckle.com/v2/users?email=email@domain.com&name=valid_string&per_page=10&role=coworker&state=active
+    uri: https://api.letsfreckle.com/v2/users?email=email@domain.com&name=valid_string&role=coworker&state=active
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 21 Nov 2018 06:48:11 GMT
+      - Sat, 24 Nov 2018 10:06:58 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -44,5 +44,5 @@ http_interactions:
       encoding: UTF-8
       string: "[]"
     http_version: 
-  recorded_at: Wed, 21 Nov 2018 06:48:11 GMT
+  recorded_at: Sat, 24 Nov 2018 10:06:59 GMT
 recorded_with: VCR 4.0.0
