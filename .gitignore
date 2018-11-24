@@ -1,3 +1,5 @@
+.env.*
+!.env.*.sample
 *.gem
 Gemfile.lock
 /coverage/
