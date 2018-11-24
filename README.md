@@ -40,15 +40,21 @@ You can set:
 
 # Testing
 
+The test suite uses the [VCR](https://github.com/vcr/vcr) gem.
+
+The contents of the cassettes is anonymized (see spec/spec_helper.rb).
+
+## Regenerating the VCR cassettes
+
+Occasionally, it is a good idea to regenerate the cassettes in order to
+do an end-to-end test.
+
 Make sure you have correctly set the `.env.test` file. Inside this file
 you must specify the keys:
 
 * `FRECKLE_TOKEN`: your Freckle API token;
 * `FRECKLE_URL`: Freckle API url;
 * `REAL_FRECKLE_USER_ID`: a real user id.
-
-The test suite uses the [VCR](https://github.com/vcr/vcr) gem.
-To regenerate the VCR cassettes, do as follows:
 
 ```shell
 $ rm -rf spec/fixtures/vcr_cassettes/*
