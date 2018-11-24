@@ -24,6 +24,7 @@ FreckleIO.configure do |c|
   c.token = ENV["FRECKLE_TOKEN"]
   c.url = ENV["FRECKLE_URL"]
   c.auth_type = :freckle_token
+  c.per_page = 20
 end
 ```
 
@@ -34,6 +35,8 @@ You can set:
 2. `auth_type`: the authentication type which will use with the server.
    Currently, the only allowed values is:
    * `:freckle_token`: uses your Freckle API token.
+3. `per_page`: the number of items included for each page. The default
+   value is 30.
 
 # Testing
 
