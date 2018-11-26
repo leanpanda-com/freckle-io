@@ -16,14 +16,6 @@ describe FreckleIO::Request::SinglePage do
     describe "#get" do
       let(:body_response) { users.last_response.body }
 
-      it "returns an array of users" do
-        expect(body_response).to be_a Array
-      end
-
-      it "returns an user" do
-        expect(body_response.first.keys).to eq(USER_KEYS)
-      end
-
       it "returns correct raw links for the first page" do
         expect(users.raw_links).to eq first_page
       end
@@ -32,14 +24,6 @@ describe FreckleIO::Request::SinglePage do
     describe "#next" do
       let(:next_users) { users.next }
       let(:body_response) { next_users.last_response.body }
-
-      it "returns an array of users" do
-        expect(body_response).to be_a Array
-      end
-
-      it "returns a user" do
-        expect(body_response.first.keys).to eq(USER_KEYS)
-      end
 
       it "previous page should be not nil" do
         expect(next_users.prev).to_not be nil
@@ -57,14 +41,6 @@ describe FreckleIO::Request::SinglePage do
 
       let(:prev_users) { users.prev }
       let(:body_response) { prev_users.last_response.body }
-
-      it "returns an array of users" do
-        expect(body_response).to be_a Array
-      end
-
-      it "returns a user" do
-        expect(body_response.first.keys).to eq(USER_KEYS)
-      end
 
       it "next page is a SinglePage" do
         expect(prev_users.next).to be_a described_class
@@ -85,14 +61,6 @@ describe FreckleIO::Request::SinglePage do
       let(:last_users) { users }
       let(:body_response) { last_users.last_response.body }
 
-      it "returns an array of users" do
-        expect(body_response).to be_a Array
-      end
-
-      it "returns a user" do
-        expect(body_response.first.keys).to eq(USER_KEYS)
-      end
-
       it "next page should be nil" do
         expect(last_users.next).to be nil
       end
@@ -111,14 +79,6 @@ describe FreckleIO::Request::SinglePage do
     describe "#first" do
       let(:first_users) { users }
       let(:body_response) { first_users.last_response.body }
-
-      it "returns an array of users" do
-        expect(body_response).to be_a Array
-      end
-
-      it "returns a user" do
-        expect(body_response.first.keys).to eq(USER_KEYS)
-      end
 
       it "prev page should be nil" do
         expect(first_users.prev).to be nil
