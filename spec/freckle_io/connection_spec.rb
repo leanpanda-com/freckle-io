@@ -2,15 +2,6 @@ require_relative "../spec_helper"
 
 describe FreckleIO::Connection do
   context "with default configuration", :vcr do
-    before do
-      FreckleIO.reset
-      FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.auth_type = :freckle_token
-      end
-    end
-
-    let(:subject) { described_class.new }
     let(:result) { subject.get("/v2/users") }
 
     describe "with header" do
@@ -78,15 +69,6 @@ describe FreckleIO::Connection do
   end
 
   context "with exceptions" do
-    before do
-      FreckleIO.reset
-      FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.auth_type = :freckle_token
-      end
-    end
-
-    let(:subject) { described_class.new }
     let(:invalid_request) { subject.get("/") }
 
     describe "with invalid host" do

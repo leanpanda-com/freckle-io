@@ -2,16 +2,6 @@ require_relative "../../spec_helper"
 
 describe FreckleIO::Client::Users do
   context "with configuration", :vcr do
-    before do
-      FreckleIO.reset
-      FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.auth_type = :freckle_token
-      end
-    end
-
-    let(:subject) { described_class.new }
-
     describe "#all" do
       let(:results) { subject.all }
       let(:first_response) { results.last_responses.first }

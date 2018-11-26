@@ -32,7 +32,6 @@ RSpec.configure do |config|
   config.before(:all) do
     FreckleIO.configure do |c|
       c.token = ENV["FRECKLE_TOKEN"]
-      c.url = ENV["FRECKLE_URL"]
       c.auth_type = :freckle_token
     end
   end

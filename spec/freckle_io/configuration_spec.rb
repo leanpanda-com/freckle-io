@@ -3,6 +3,7 @@ require_relative "../spec_helper"
 describe FreckleIO::Configuration do
   context "with right configuration" do
     before do
+      FreckleIO.reset
       FreckleIO.configure do |config|
         config.token = ENV["FRECKLE_TOKEN"]
         config.url = ENV["FRECKLE_URL"]
@@ -24,6 +25,7 @@ describe FreckleIO::Configuration do
 
   context "with wrong configuration" do
     before do
+      FreckleIO.reset
       FreckleIO.configure do |config|
         config.auth_type = :wrong_type
       end

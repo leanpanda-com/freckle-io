@@ -2,15 +2,6 @@ require_relative "../../spec_helper"
 
 describe FreckleIO::Request::MultiplePages do
   context "with configuration", :vcr do
-    before do
-      FreckleIO.reset
-      FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.auth_type = :freckle_token
-      end
-    end
-
-    let(:subject) { described_class.new }
     let(:result) { subject.get("/v2/users") }
     let(:default_per_page) { 30 }
 
@@ -29,10 +20,7 @@ describe FreckleIO::Request::MultiplePages do
 
   context "with per page", :vcr do
     before do
-      FreckleIO.reset
       FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.auth_type = :freckle_token
         config.per_page = per_page
       end
     end
