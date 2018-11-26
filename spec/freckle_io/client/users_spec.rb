@@ -20,12 +20,10 @@ describe FreckleIO::Client::Users do
         expect(results).to be_a(FreckleIO::Request::MultiplePages)
       end
 
-      it "responses must be a Faraday::Response" do
-        expect(results.last_responses).to all(be_a(Faraday::Response))
-      end
-
-      it "an element of response must be a valid user" do
-        expect(first_response.body.first.keys).to eq(USER_KEYS)
+      it "returns a user for each response" do
+        results.last_responses.each do |last_response|
+          expect(last_response.body.first.keys).to eq USER_KEYS
+        end
       end
     end
 

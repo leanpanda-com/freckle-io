@@ -21,12 +21,6 @@ describe FreckleIO::Request::MultiplePages do
         expect(last_responses).to all(be_a(Faraday::Response))
       end
 
-      it "returns an user for each response" do
-        last_responses.each do |last_response|
-          expect(last_response.body.first.keys).to eq USER_KEYS
-        end
-      end
-
       it "returns freckle default per page elements" do
         expect(last_responses.first.body.count).to eq(default_per_page)
       end
