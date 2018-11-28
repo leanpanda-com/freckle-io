@@ -83,3 +83,10 @@ $ bundle exec rspec
 # Compatibility
 
 This client is set for work with the version 2 (v2) of the Freckle API.
+
+# Supported Ruby Versions
+
+This library is tested against the following Ruby implementations:
+
+* Ruby 2.4
+* Ruby 2.5
