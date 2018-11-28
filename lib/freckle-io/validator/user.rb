@@ -7,7 +7,7 @@ module FreckleIO
       def self.validation(params, valid_keys)
         Dry::Validation.Schema do
           configure do
-            config.messages_file = "lib/freckle_io/validator/validation.yml"
+            config.messages_file = "lib/freckle-io/validator/validation.yml"
             config.namespace = :user
 
             predicates(RestrictedHash)

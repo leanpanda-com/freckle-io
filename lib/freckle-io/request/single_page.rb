@@ -1,4 +1,4 @@
-require "freckle_io/paginator"
+require "freckle-io/paginator"
 
 module FreckleIO
   module Request

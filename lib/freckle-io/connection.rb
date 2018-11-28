@@ -1,4 +1,4 @@
-require "freckle_io/authentication"
+require "freckle-io/authentication"
 require "faraday"
 require "faraday_middleware"
 
