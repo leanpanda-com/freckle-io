@@ -38,6 +38,24 @@ You can set:
 3. `per_page`: the number of items included for each page. The default
    value is 30.
 
+## Example
+
+```ruby
+require 'dotenv'
+require 'freckle-io'
+
+FreckleIO.configure do |c|
+  c.token = ENV["FRECKLE_TOKEN"]
+  c.auth_type = :freckle_token
+end
+
+client_users = FreckleIO::Client::Users.new.all
+
+client_users.last_responses.each do |resp|
+  resp.body
+end
+```
+
 # Testing
 
 The test suite uses the [VCR](https://github.com/vcr/vcr) gem.
