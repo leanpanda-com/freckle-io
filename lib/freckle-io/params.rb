@@ -32,6 +32,8 @@ module FreckleIO
 
     def which_validator_module
       Kernel.const_get(validator_module)
+    rescue NameError => e
+      raise Errors::Params::InvalidModule.new, e.message
     end
 
     def validator_messages
