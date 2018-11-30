@@ -112,5 +112,38 @@ describe FreckleIO::Client::Users do
         end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
       end
     end
+
+    describe "with validator" do
+      let(:user_validator) do
+        class_double(
+          FreckleIO::Validator::User,
+          errors: {},
+          output: {}
+        )
+      end
+
+      let(:result) do
+        subject.all
+      end
+
+      before do
+        allow(FreckleIO::Validator::User).to receive(
+          :validation
+        ).with({}, FreckleIO::Client::Users::ALLOWED_KEYS) do
+          user_validator
+        end
+
+        allow(FreckleIO::Validator::User).to receive(:errors)
+        allow(FreckleIO::Validator::User).to receive(:output)
+
+        result
+      end
+
+      it "call user's validator" do
+        expect(FreckleIO::Validator::User).to have_received(
+          :validation
+        )
+      end
+    end
   end
 end
