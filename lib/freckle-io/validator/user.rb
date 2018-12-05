@@ -31,6 +31,7 @@ module FreckleIO
             optional(:email).value(format?: /\A[^@\s]+@[^@\s]+\z/)
             optional(:role).value(included_in?: valid_roles)
             optional(:state).value(included_in?: valid_states)
+            optional(:per_page).filled :int?
           end
         end.with(allowed_keys: valid_keys).call(params)
       end

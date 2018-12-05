@@ -36,7 +36,8 @@ describe FreckleIO::Client::Users do
           name: "valid_string",
           email: "email@domain.com",
           role: "coworker",
-          state: "active"
+          state: "active",
+          per_page: 8
         }
       end
 
