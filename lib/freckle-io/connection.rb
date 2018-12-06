@@ -33,7 +33,7 @@ module FreckleIO
     )
       responses = []
 
-      connection.in_parallel do
+      connection.in_parallel(manager) do
         (from_page_number..to_page_number).each do |page|
           merged_params = {page: page}.merge(params)
 
@@ -69,6 +69,10 @@ module FreckleIO
     def set_request_options(request, options)
       request.options.timeout = options[:timeout]
       request.options.open_timeout = options[:open_timeout]
+    end
+
+    def manager
+      @manager ||= Typhoeus::Hydra.new(:max_concurrency => 5)
     end
   end
 end
