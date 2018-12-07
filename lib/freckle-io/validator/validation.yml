@@ -2,4 +2,7 @@ en:
   errors:
     rules:
       user:
-        restricted_hash?: "has unknown keys. Allowed keys are: name, email, role and state."
+        restricted_hash?: "has unknown keys. Allowed keys are: name, email, role, state and per_page"
+      project:
+        restricted_hash?: "has unknown keys. Allowed keys are: name, project_group_ids, billing_increment, enabled, billable and per_page"
+        valid_increment?: "has invalid values. Allowed values are: 1, 5, 6, 10, 15"
