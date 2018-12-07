@@ -22,8 +22,6 @@ describe FreckleIO::Client::Projects do
       let(:response) { result.last_response }
 
       it "get a spacific project" do
-        require "pry"; binding.pry
-
         expect(response.body.keys).to eq(PROJECT_KEYS)
       end
 
