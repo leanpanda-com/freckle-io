@@ -1,0 +1,26 @@
+PROJECT_KEYS = %w(
+  id
+  name
+  description
+  billing_increment
+  enabled
+  billable
+  color
+  created_at
+  updated_at
+  group
+  minutes
+  billable_minutes
+  unbillable_minutes
+  invoiced_minutes
+  uninvoiced_minutes
+  remaining_minutes
+  budgeted_minutes
+  participants
+  entries
+  entries_url
+  url
+  merge_url
+  archive_url
+  unarchive_url
+).freeze
