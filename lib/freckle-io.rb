@@ -10,7 +10,9 @@ require "freckle-io/request/multiple_pages"
 require "freckle-io/request/single_page"
 require "freckle-io/validator/restricted_hash"
 require "freckle-io/validator/user"
+require "freckle-io/validator/project"
 require "freckle-io/client/users"
+require "freckle-io/client/projects"
 
 module FreckleIO
   def self.configuration
