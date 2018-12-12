@@ -6,3 +6,5 @@ en:
       project:
         restricted_hash?: "has unknown keys. Allowed keys are: name, project_group_ids, billing_increment, enabled, billable and per_page"
         valid_increment?: "has invalid values. Allowed values are: 1, 5, 6, 10, 15"
+      entry:
+        restricted_hash?: "has unknown keys. Allowed keys are: user_ids, description, project_ids, tag_ids, tag_filter_type, invoice_ids, import_ids, from, to, invoiced, invoice_at_from, invoice_at_to, updated_from, updated_to, billable, approved_at_from, approved_at_to, approved_by_ids and per_page"
