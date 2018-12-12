@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.letsfreckle.com/v2/entries?approved_at_from=2018-01-15T00:00:00Z&approved_at_to=2018-01-15T00:00:00Z&approved_by_ids=1,2&billable=true&description=aaa&from=2018-01-01&per_page=30&project_ids=1,2&tag_filter_type=and&tag_ids=1,2&to=2018-01-01&updated_from=2018-01-15T00:00:00Z&updated_to=2018-01-15T00:00:00Z&user_ids=1,2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - MyFreckleBot/1.0
+      X-Freckletoken:
+      - "<TOKEN>"
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 12 Dec 2018 15:48:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '58'
+      Vary:
+      - Origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Wed, 12 Dec 2018 15:48:00 GMT
+recorded_with: VCR 4.0.0
