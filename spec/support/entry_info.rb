@@ -1,0 +1,19 @@
+ENTRY_KEYS = %w(
+  id
+  date
+  billable
+  minutes
+  description
+  created_at
+  updated_at
+  approved_at
+  source_url
+  user
+  approved_by
+  tags
+  project
+  url
+  invoiced_outside_of_freckle_url
+  approved_url
+  unapproved_url
+).freeze
