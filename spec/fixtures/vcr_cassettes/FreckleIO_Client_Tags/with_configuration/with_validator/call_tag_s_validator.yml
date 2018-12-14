@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.letsfreckle.com/v2/tags
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - MyFreckleBot/1.0
+      X-Freckletoken:
+      - "<TOKEN>"
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 14 Dec 2018 17:38:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '6855'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '410'
+      Vary:
+      - Origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+    body:
+      encoding: UTF-8
+      string: '[{"id":0,"name":"name_0","billable":true,"formatted_name":"formatted_name_0","entries":2368,"entries_url":"http://foo.com/0/entries","url":"http://foo.com/0","created_at":"2013-11-22T09:47:59Z","updated_at":"2018-12-14T05:31:01Z"},{"id":1,"name":"name_1","billable":true,"formatted_name":"formatted_name_1","entries":155,"entries_url":"http://foo.com/1/entries","url":"http://foo.com/1","created_at":"2014-01-30T16:09:44Z","updated_at":"2018-12-14T05:31:01Z"},{"id":2,"name":"name_2","billable":true,"formatted_name":"formatted_name_2","entries":151,"entries_url":"http://foo.com/2/entries","url":"http://foo.com/2","created_at":"2016-04-20T10:35:22Z","updated_at":"2018-12-14T05:31:01Z"},{"id":3,"name":"name_3","billable":true,"formatted_name":"formatted_name_3","entries":1131,"entries_url":"http://foo.com/3/entries","url":"http://foo.com/3","created_at":"2014-05-08T14:50:33Z","updated_at":"2018-12-14T05:31:01Z"},{"id":4,"name":"name_4","billable":true,"formatted_name":"formatted_name_4","entries":3073,"entries_url":"http://foo.com/4/entries","url":"http://foo.com/4","created_at":"2013-11-22T09:47:59Z","updated_at":"2018-12-14T05:31:01Z"},{"id":5,"name":"name_5","billable":true,"formatted_name":"formatted_name_5","entries":14636,"entries_url":"http://foo.com/5/entries","url":"http://foo.com/5","created_at":"2013-11-22T09:47:59Z","updated_at":"2018-12-14T05:31:01Z"},{"id":6,"name":"name_6","billable":true,"formatted_name":"formatted_name_6","entries":42,"entries_url":"http://foo.com/6/entries","url":"http://foo.com/6","created_at":"2017-01-24T10:17:31Z","updated_at":"2018-12-14T05:31:01Z"},{"id":7,"name":"name_7","billable":true,"formatted_name":"formatted_name_7","entries":83,"entries_url":"http://foo.com/7/entries","url":"http://foo.com/7","created_at":"2017-05-26T14:45:02Z","updated_at":"2018-12-14T05:31:01Z"},{"id":8,"name":"name_8","billable":true,"formatted_name":"formatted_name_8","entries":600,"entries_url":"http://foo.com/8/entries","url":"http://foo.com/8","created_at":"2013-12-12T09:42:26Z","updated_at":"2018-12-14T05:31:01Z"},{"id":9,"name":"name_9","billable":true,"formatted_name":"formatted_name_9","entries":15,"entries_url":"http://foo.com/9/entries","url":"http://foo.com/9","created_at":"2014-05-10T08:02:55Z","updated_at":"2018-12-14T05:31:01Z"},{"id":10,"name":"name_10","billable":true,"formatted_name":"formatted_name_10","entries":1,"entries_url":"http://foo.com/10/entries","url":"http://foo.com/10","created_at":"2018-11-13T19:47:31Z","updated_at":"2018-12-14T05:31:01Z"},{"id":11,"name":"name_11","billable":true,"formatted_name":"formatted_name_11","entries":293,"entries_url":"http://foo.com/11/entries","url":"http://foo.com/11","created_at":"2016-05-08T13:24:40Z","updated_at":"2018-12-14T05:31:01Z"},{"id":12,"name":"name_12","billable":true,"formatted_name":"formatted_name_12","entries":197,"entries_url":"http://foo.com/12/entries","url":"http://foo.com/12","created_at":"2016-09-27T08:28:52Z","updated_at":"2018-12-14T05:31:01Z"},{"id":13,"name":"name_13","billable":true,"formatted_name":"formatted_name_13","entries":115,"entries_url":"http://foo.com/13/entries","url":"http://foo.com/13","created_at":"2016-04-20T09:30:38Z","updated_at":"2018-12-14T05:31:01Z"},{"id":14,"name":"name_14","billable":true,"formatted_name":"formatted_name_14","entries":1854,"entries_url":"http://foo.com/14/entries","url":"http://foo.com/14","created_at":"2013-11-22T09:47:59Z","updated_at":"2018-12-14T05:31:01Z"},{"id":15,"name":"name_15","billable":true,"formatted_name":"formatted_name_15","entries":5,"entries_url":"http://foo.com/15/entries","url":"http://foo.com/15","created_at":"2018-05-28T14:57:38Z","updated_at":"2018-12-14T05:31:01Z"},{"id":16,"name":"name_16","billable":true,"formatted_name":"formatted_name_16","entries":34,"entries_url":"http://foo.com/16/entries","url":"http://foo.com/16","created_at":"2016-03-14T18:24:33Z","updated_at":"2018-12-14T05:31:01Z"},{"id":17,"name":"name_17","billable":false,"formatted_name":"formatted_name_17*","entries":354,"entries_url":"http://foo.com/17/entries","url":"http://foo.com/17","created_at":"2013-11-26T17:46:05Z","updated_at":"2018-12-14T05:31:01Z"},{"id":18,"name":"name_18","billable":true,"formatted_name":"formatted_name_18","entries":416,"entries_url":"http://foo.com/18/entries","url":"http://foo.com/18","created_at":"2016-05-08T13:20:56Z","updated_at":"2018-12-14T05:31:01Z"},{"id":19,"name":"name_19","billable":true,"formatted_name":"formatted_name_19","entries":1972,"entries_url":"http://foo.com/19/entries","url":"http://foo.com/19","created_at":"2015-08-14T10:16:07Z","updated_at":"2018-12-14T05:31:01Z"},{"id":20,"name":"name_20","billable":true,"formatted_name":"formatted_name_20","entries":26,"entries_url":"http://foo.com/20/entries","url":"http://foo.com/20","created_at":"2017-01-19T11:04:28Z","updated_at":"2018-12-14T05:31:01Z"},{"id":21,"name":"name_21","billable":false,"formatted_name":"formatted_name_21*","entries":2190,"entries_url":"http://foo.com/21/entries","url":"http://foo.com/21","created_at":"2013-11-22T09:48:00Z","updated_at":"2018-12-14T05:31:01Z"},{"id":22,"name":"name_22","billable":true,"formatted_name":"formatted_name_22","entries":608,"entries_url":"http://foo.com/22/entries","url":"http://foo.com/22","created_at":"2015-05-13T22:35:33Z","updated_at":"2018-12-14T05:31:01Z"},{"id":23,"name":"name_23","billable":true,"formatted_name":"formatted_name_23","entries":619,"entries_url":"http://foo.com/23/entries","url":"http://foo.com/23","created_at":"2015-02-26T20:30:21Z","updated_at":"2018-12-14T05:31:01Z"}]'
+    http_version: 
+  recorded_at: Fri, 14 Dec 2018 17:38:52 GMT
+recorded_with: VCR 4.0.0
