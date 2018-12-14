@@ -13,10 +13,12 @@ require "freckle-io/validator/user"
 require "freckle-io/validator/project"
 require "freckle-io/validator/entry"
 require "freckle-io/validator/tag"
+require "freckle-io/validator/project_group"
 require "freckle-io/client/users"
 require "freckle-io/client/projects"
 require "freckle-io/client/entries"
 require "freckle-io/client/tags"
+require "freckle-io/client/project_groups"
 
 module FreckleIO
   def self.configuration
