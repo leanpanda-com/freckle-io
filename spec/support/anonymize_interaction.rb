@@ -8,6 +8,7 @@ class AnonymizeInteraction
     {path: %r{^\/v2\/users(\/\d+)?$}, klass: "Anonymize::Users"},
     {path: %r{^\/v2\/projects(\/\d+)?$}, klass: "Anonymize::Projects"},
     {path: %r{^\/v2\/entries(\/\d+)?$}, klass: "Anonymize::Entries"},
+    {path: %r{^\/v2\/tags(\/\d+)?$}, klass: "Anonymize::Tags"},
   ].freeze
 
   def initialize(interaction:)
