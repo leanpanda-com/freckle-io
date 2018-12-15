@@ -6,7 +6,6 @@ module Anonymize
     PROJECT_GROUP_API_REPLACE_VALUES = {
       id: /\"id\":(.*?),/mi,
       name: /\"name\":\"(.*?)\"/mi,
-      formatted_name: /\"formatted_name\":\"(.*?)\"/mi,
       url: /\"url\":\"(.*?)\"/mi,
     }.freeze
     # rubocop:enable Metrics/LineLength
@@ -22,12 +21,15 @@ module Anonymize
     private
 
     def find_and_replace
-      PROJECT_GROUP_API_REPLACE_VALUES.each do |key, regex|
-        match_texts = interaction.response.body.scan(regex)
+      response_body = interaction.response.body
 
-        match_texts.each_with_index do |text, index|
+      PROJECT_GROUP_API_REPLACE_VALUES.each do |key, regex|
+        match_texts = response_body.scan(regex).uniq
+        sort_texts = sort_by_word_count(match_texts)
+
+        sort_texts.each_with_index do |text, index|
           replace = anonymize_response_value(key, index)
-          interaction.filter!(text.first, replace)
+          interaction.filter!(text, replace)
         end
       end
 
@@ -44,6 +46,12 @@ module Anonymize
         "#{key}_#{index}@domain.com"
       else
         "#{key}_#{index}"
+      end
+    end
+
+    def sort_by_word_count(words)
+      words.flatten.sort do |a, b|
+        b.split.length <=> a.split.length
       end
     end
   end
