@@ -10,3 +10,5 @@ en:
         restricted_hash?: "has unknown keys. Allowed keys are: user_ids, description, project_ids, tag_ids, tag_filter_type, invoice_ids, import_ids, from, to, invoiced, invoice_at_from, invoice_at_to, updated_from, updated_to, billable, approved_at_from, approved_at_to, approved_by_ids and per_page"
       tag:
         restricted_hash?: "has unknown keys. Allowed keys are: name, billable and per_page"
+      project_group:
+        restricted_hash?: "has unknown keys. Allowed keys are: name, project ids and per_page"
