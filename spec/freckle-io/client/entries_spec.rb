@@ -45,17 +45,17 @@ describe FreckleIO::Client::Entries do
           user_ids: "1,2",
           description: "aaa",
           project_ids: "1,2",
-          tag_ids:"1,2",
-          tag_filter_type:"and",
-          from:"2018-01-01",
-          to:"2018-01-01",
-          updated_from:"2018-01-15T00:00:00Z",
-          updated_to:"2018-01-15T00:00:00Z",
+          tag_ids: "1,2",
+          tag_filter_type: "and",
+          from: "2018-01-01",
+          to: "2018-01-01",
+          updated_from: "2018-01-15T00:00:00Z",
+          updated_to: "2018-01-15T00:00:00Z",
           billable: true,
-          approved_at_from:"2018-01-15T00:00:00Z",
-          approved_at_to:"2018-01-15T00:00:00Z",
-          approved_by_ids:"1,2",
-          per_page:30
+          approved_at_from: "2018-01-15T00:00:00Z",
+          approved_at_to: "2018-01-15T00:00:00Z",
+          approved_by_ids: "1,2",
+          per_page: 30
         }
       end
 
@@ -215,7 +215,7 @@ describe FreckleIO::Client::Entries do
     describe "with wrong updated from" do
       let(:params) do
         {
-          updated_from: 123,
+          updated_from: 123
         }
       end
 
@@ -231,7 +231,7 @@ describe FreckleIO::Client::Entries do
     describe "with wrong updated to" do
       let(:params) do
         {
-          updated_to: 123,
+          updated_to: 123
         }
       end
 

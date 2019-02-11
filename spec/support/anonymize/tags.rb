@@ -1,13 +1,11 @@
 module Anonymize
   class Tags
     attr_accessor :interaction
-
-    # rubocop:disable Metrics/LineLength
     TAG_API_REPLACE_VALUES = {
       id: /\"id\":(.*?),/mi,
       name: /\"name\":\"(.*?)\"/mi,
       formatted_name: /\"formatted_name\":\"(.*?)\"/mi,
-      url: /\"url\":\"(.*?)\"/mi,
+      url: /\"url\":\"(.*?)\"/mi
     }.freeze
     # rubocop:enable Metrics/LineLength
 

@@ -3,7 +3,6 @@ module FreckleIO
     module Tag
       # rubocop:disable Metrics/MethodLength,
       # rubocop:disable Metrics/AbcSize,
-      # rubocop:disable Lint/NestedMethodDefinition
       def self.validation(params, valid_keys)
         Dry::Validation.Schema do
           configure do

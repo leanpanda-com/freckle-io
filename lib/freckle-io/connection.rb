@@ -72,7 +72,7 @@ module FreckleIO
     end
 
     def manager
-      @manager ||= Typhoeus::Hydra.new(:max_concurrency => 5)
+      @manager ||= Typhoeus::Hydra.new(max_concurrency: 5)
     end
   end
 end

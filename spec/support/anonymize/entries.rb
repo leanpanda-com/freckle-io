@@ -1,8 +1,6 @@
 module Anonymize
   class Entries
     attr_accessor :interaction
-
-    # rubocop:disable Metrics/LineLength
     ENTRY_API_REPLACE_VALUES = {
       id: /\"id\":(.*?),/i,
       description: /\"description\":\"(.*?)\"/i,
@@ -11,7 +9,7 @@ module Anonymize
       first_name: /\"first_name\":\"(.*?)\"/i,
       last_name: /\"last_name\":\"(.*?)\"/i,
       profile_image_url: /\"profile_image_url\":\"(.*?)\"/i,
-      url: /\"url\":\"(.*?)\"/i,
+      url: /\"url\":\"(.*?)\"/i
     }.freeze
     # rubocop:enable Metrics/LineLength
 

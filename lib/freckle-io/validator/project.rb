@@ -20,7 +20,7 @@ module FreckleIO
               %w(1 5 6 10 15)
             end
 
-            def valid_increment?(options, values)
+            def valid_increment?(_options, values)
               values.split(",").all? do |value|
                 valid_increment.include?(value)
               end

@@ -1,8 +1,6 @@
 module Anonymize
   class Projects
     attr_accessor :interaction
-
-    # rubocop:disable Metrics/LineLength
     PROJECT_API_REPLACE_VALUES = {
       name: /\"name\":\"(.*?)\"/i,
       id: /\"id\":(.*?),/i,
@@ -11,7 +9,7 @@ module Anonymize
       email: /\"email\":\"(.*?)\",/i,
       first_name: /\"first_name\":\"(.*?)\"/i,
       last_name: /\"last_name\":\"(.*?)\"/i,
-      profile_image_url: /\"profile_image_url\":\"(.*?)\"/i,
+      profile_image_url: /\"profile_image_url\":\"(.*?)\"/i
     }.freeze
     # rubocop:enable Metrics/LineLength
 
