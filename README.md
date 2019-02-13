@@ -25,6 +25,7 @@ FreckleIO.configure do |c|
   c.url = ENV["FRECKLE_URL"]
   c.auth_type = :freckle_token
   c.per_page = 20
+  c.max_concurrency = 5
 end
 ```
 
@@ -37,6 +38,7 @@ You can set:
    * `:freckle_token`: uses your Freckle API token.
 3. `per_page`: the number of items included for each page. The default
    value is 30.
+4. `max_concurrency`: max thread for each requests.
 
 ## Example
 
@@ -47,6 +49,7 @@ require 'freckle-io'
 FreckleIO.configure do |c|
   c.token = ENV["FRECKLE_TOKEN"]
   c.auth_type = :freckle_token
+  c.max_concurrency = 5
 end
 
 client_users = FreckleIO::Client::Users.new.all

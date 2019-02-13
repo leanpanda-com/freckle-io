@@ -10,6 +10,7 @@ module FreckleIO
     attr_writer :token
     attr_writer :url
     attr_writer :per_page
+    attr_writer :max_concurrency
 
     def initialize
       @token = nil
@@ -36,6 +37,12 @@ module FreckleIO
 
     def per_page
       @per_page || nil
+    end
+
+    def max_concurrency
+      @max_concurrency || raise(
+        Errors::Configuration, "Max concurrency missing!"
+      )
     end
   end
 end

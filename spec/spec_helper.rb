@@ -33,6 +33,7 @@ RSpec.configure do |config|
     FreckleIO.configure do |c|
       c.token = ENV["FRECKLE_TOKEN"]
       c.auth_type = :freckle_token
+      c.max_concurrency = 5
     end
   end
 
