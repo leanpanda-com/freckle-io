@@ -1,4 +1,4 @@
-require "freckle-io/authentication"
+require "freckle_io/authentication"
 
 module FreckleIO
   class Configuration

@@ -19,7 +19,7 @@ SimpleCov.start do
   add_filter "spec/"
 end
 
-require "freckle-io"
+require "freckle_io"
 require "rspec"
 require "vcr"
 require "webmock"
