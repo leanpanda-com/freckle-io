@@ -11,7 +11,6 @@ module Anonymize
       last_name: /\"last_name\":\"(.*?)\"/i,
       profile_image_url: /\"profile_image_url\":\"(.*?)\"/i
     }.freeze
-    # rubocop:enable Metrics/LineLength
 
     def initialize(interaction:)
       @interaction = interaction

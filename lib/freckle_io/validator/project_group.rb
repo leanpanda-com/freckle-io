@@ -1,6 +1,6 @@
 module FreckleIO
   module Validator
-    module Tag
+    module ProjectGroup
       # rubocop:disable Metrics/MethodLength,
       # rubocop:disable Metrics/AbcSize,
       def self.validation(params, valid_keys)
@@ -9,7 +9,7 @@ module FreckleIO
             config.messages_file = File.join(
               __dir__, "validation.yml"
             )
-            config.namespace = :tag
+            config.namespace = :project_group
 
             predicates(RestrictedHash)
 
@@ -18,14 +18,13 @@ module FreckleIO
 
           restricted_hash?(allowed_keys) do
             optional(:name).filled :str?
-            optional(:billable).filled :bool?
+            optional(:project_ids).filled :str?
             optional(:per_page).filled :int?
           end
         end.with(allowed_keys: valid_keys).call(params)
       end
       # rubocop:enable Metrics/MethodLength,
       # rubocop:enable Metrics/AbcSize,
-      # rubocop:enable Lint/NestedMethodDefinition
     end
   end
 end

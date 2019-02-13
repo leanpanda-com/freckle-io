@@ -55,6 +55,12 @@ describe FreckleIO::Configuration do
       end.to raise_error(FreckleIO::Errors::Configuration)
     end
 
+    it "raises a configuration error for max concurrency" do
+      expect do
+        FreckleIO.configuration.max_concurrency
+      end.to raise_error(FreckleIO::Errors::Configuration)
+    end
+
     it "return default url" do
       expect(
         FreckleIO.configuration.url

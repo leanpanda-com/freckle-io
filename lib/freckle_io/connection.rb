@@ -1,4 +1,4 @@
-require "freckle-io/authentication"
+require "freckle_io/authentication"
 require "faraday"
 require "faraday_middleware"
 
@@ -72,7 +72,9 @@ module FreckleIO
     end
 
     def manager
-      @manager ||= Typhoeus::Hydra.new(max_concurrency: 5)
+      @manager ||= Typhoeus::Hydra.new(
+        max_concurrency: FreckleIO.configuration.max_concurrency
+      )
     end
   end
 end
