@@ -25,7 +25,6 @@ module FreckleIO
       end
       # rubocop:enable Metrics/MethodLength,
       # rubocop:enable Metrics/AbcSize,
-      # rubocop:enable Lint/NestedMethodDefinition
     end
   end
 end

@@ -4,6 +4,7 @@ module FreckleIO
       # rubocop:disable Metrics/MethodLength,
       # rubocop:disable Metrics/AbcSize,
       # rubocop:disable Lint/NestedMethodDefinition
+      # rubocop:disable Metrics/BlockLength,
       def self.validation(params, valid_keys)
         Dry::Validation.Schema do
           configure do
@@ -27,7 +28,9 @@ module FreckleIO
             optional(:project_ids).filled :str?
             optional(:tag_ids).filled :str?
             optional(:tag_filter_type).filled :str?
-            optional(:tag_filter_type).value(included_in?: valid_tag_filter_type)
+            optional(
+              :tag_filter_type
+            ).value(included_in?: valid_tag_filter_type)
             optional(:invoice_ids).filled :str?
             optional(:import_ids).filled :str?
             optional(:from).filled :str?
@@ -48,6 +51,7 @@ module FreckleIO
       # rubocop:enable Metrics/MethodLength,
       # rubocop:enable Metrics/AbcSize,
       # rubocop:enable Lint/NestedMethodDefinition
+      # rubocop:enable Metrics/BlockLength,
     end
   end
 end

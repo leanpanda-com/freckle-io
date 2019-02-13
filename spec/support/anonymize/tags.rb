@@ -7,7 +7,6 @@ module Anonymize
       formatted_name: /\"formatted_name\":\"(.*?)\"/mi,
       url: /\"url\":\"(.*?)\"/mi
     }.freeze
-    # rubocop:enable Metrics/LineLength
 
     def initialize(interaction:)
       @interaction = interaction

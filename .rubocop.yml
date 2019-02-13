@@ -46,6 +46,8 @@ Style/SymbolArray:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Layout/MultilineHashBraceLayout:
+  Enabled: false
 
 RSpec/DescribeClass:
   Exclude:
