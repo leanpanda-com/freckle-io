@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.4.0'
 
-  spec.files        = Dir["lib/**/*.rb"]
+  spec.files        = `git ls-files -z`.split("\x0")
   spec.test_files   = Dir["spec/**/*.rb"]
 
   spec.add_development_dependency "bundler"
