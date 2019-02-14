@@ -29,12 +29,16 @@ require "dotenv"
 Dotenv.load(".env.test")
 
 RSpec.configure do |config|
-  config.before(:all) do
+  config.before(:each) do
     FreckleIO.configure do |c|
       c.token = ENV["FRECKLE_TOKEN"]
       c.auth_type = :freckle_token
       c.max_concurrency = 5
     end
+  end
+
+  config.after(:each) do
+    FreckleIO.reset
   end
 
   config.include_context "with raw links"
