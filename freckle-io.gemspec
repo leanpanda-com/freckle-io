@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
 
   spec.add_runtime_dependency "dotenv"
-  spec.add_runtime_dependency "dry-validation"
+  spec.add_runtime_dependency "dry-validation", "~> 0.13.0"
   spec.add_runtime_dependency "faraday", ">= 0.15.2"
   spec.add_runtime_dependency "faraday_middleware", ">= 0.12"
   spec.add_runtime_dependency "typhoeus"
