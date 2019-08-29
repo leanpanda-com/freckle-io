@@ -14,6 +14,7 @@ ENTRY_KEYS = %w(
   project
   url
   invoiced_outside_of_freckle_url
+  invoiced_outside_of_noko_url
   approved_url
   unapproved_url
 ).freeze

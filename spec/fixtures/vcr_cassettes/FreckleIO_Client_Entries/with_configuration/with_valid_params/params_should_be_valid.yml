@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.letsfreckle.com/v2/entries?approved_at_from=2018-01-15T00:00:00Z&approved_at_to=2018-01-15T00:00:00Z&approved_by_ids=1,2&billable=true&description=aaa&from=2018-01-01&per_page=30&project_ids=1,2&tag_filter_type=and&tag_ids=1,2&to=2018-01-01&updated_from=2018-01-15T00:00:00Z&updated_to=2018-01-15T00:00:00Z&user_ids=1,2
+    uri: https://api.nokotime.com/v2/entries?approved_at_from=2018-01-15T00:00:00Z&approved_at_to=2018-01-15T00:00:00Z&approved_by_ids=1,2&billable=true&description=aaa&from=2018-01-01&per_page=30&project_ids=1,2&tag_filter_type=and&tag_ids=1,2&to=2018-01-01&updated_from=2018-01-15T00:00:00Z&updated_to=2018-01-15T00:00:00Z&user_ids=1,2
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 12 Dec 2018 15:48:00 GMT
+      - Thu, 29 Aug 2019 08:07:03 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Runtime:
-      - '58'
+      - '63'
       Vary:
       - Origin
       Strict-Transport-Security:
@@ -44,5 +44,5 @@ http_interactions:
       encoding: UTF-8
       string: "[]"
     http_version: 
-  recorded_at: Wed, 12 Dec 2018 15:48:00 GMT
+  recorded_at: Thu, 29 Aug 2019 08:07:03 GMT
 recorded_with: VCR 4.0.0

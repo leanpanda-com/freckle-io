@@ -4,7 +4,7 @@ module FreckleIO
   class Configuration
     include Authentication
 
-    DEFAULT_URL = "https://api.letsfreckle.com/v2".freeze
+    DEFAULT_URL = "https://api.nokotime.com/v2".freeze
 
     attr_writer :auth_type
     attr_writer :token

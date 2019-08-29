@@ -34,6 +34,7 @@ RSpec.configure do |config|
       c.token = ENV["FRECKLE_TOKEN"]
       c.auth_type = :freckle_token
       c.max_concurrency = 5
+      c.url = "https://api.nokotime.com"
     end
   end
 
