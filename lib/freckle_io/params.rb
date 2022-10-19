@@ -1,7 +1,7 @@
 module FreckleIO
   class Params
-    attr_reader :params
-    attr_reader :validator_module
+    attr_reader :params,
+                :validator_module
 
     def initialize(
       params,

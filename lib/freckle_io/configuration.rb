@@ -6,11 +6,11 @@ module FreckleIO
 
     DEFAULT_URL = "https://api.nokotime.com/v2".freeze
 
-    attr_writer :auth_type
-    attr_writer :token
-    attr_writer :url
-    attr_writer :per_page
-    attr_writer :max_concurrency
+    attr_writer :auth_type,
+                :token,
+                :url,
+                :per_page,
+                :max_concurrency
 
     def initialize
       @token = nil

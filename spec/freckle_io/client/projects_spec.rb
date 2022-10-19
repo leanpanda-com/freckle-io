@@ -18,7 +18,10 @@ describe FreckleIO::Client::Projects do
     end
 
     describe "#show" do
-      let(:result) { subject.show(ENV["REAL_FRECKLE_PROJECT_ID"]) }
+      let(:real_freckle_project_id) do
+        ENV.fetch("REAL_FRECKLE_PROJECT_ID", nil)
+      end
+      let(:result) { subject.show(real_freckle_project_id) }
       let(:response) { result.last_response }
 
       it "get a spacific project" do
@@ -162,7 +165,6 @@ describe FreckleIO::Client::Projects do
           project_validator
         end
         allow(project_validator).to receive(:call) { validation_result }
-
 
         result
       end

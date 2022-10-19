@@ -24,7 +24,7 @@ module FreckleIO
       end
 
       rule(:tag_filter_type) do
-        if value != nil && !["and", "combination of"].include?(value)
+        if !value.nil? && !["and", "combination of"].include?(value)
           key.failure(:invalid_tag_filter_type)
         end
       end

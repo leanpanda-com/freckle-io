@@ -11,7 +11,7 @@ module FreckleIO
       end
 
       rule(:billing_increment) do
-        if value != nil && !%w(1 5 6 10 15).include?(value)
+        if !value.nil? && !%w(1 5 6 10 15).include?(value)
           key.failure(:invalid_billing_increment)
         end
       end

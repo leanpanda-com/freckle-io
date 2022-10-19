@@ -7,7 +7,7 @@ module FreckleIO
       config.messages.load_paths << File.join(__dir__, "validation.yml")
 
       register_macro(:email_format) do
-        if value != nil && !EMAIL_REGEX.match?(value)
+        if !value.nil? && !EMAIL_REGEX.match?(value)
           key.failure(:invalid_email_format)
         end
       end

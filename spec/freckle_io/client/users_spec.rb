@@ -18,7 +18,10 @@ describe FreckleIO::Client::Users do
     end
 
     describe "#show" do
-      let(:result) { subject.show(ENV["REAL_FRECKLE_USER_ID"]) }
+      let(:real_freckle_user_id) do
+        ENV.fetch("REAL_FRECKLE_USER_ID", nil)
+      end
+      let(:result) { subject.show(real_freckle_user_id) }
       let(:response) { result.last_response }
 
       it "get a spacific user" do

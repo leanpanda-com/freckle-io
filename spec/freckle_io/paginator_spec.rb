@@ -52,25 +52,25 @@ describe FreckleIO::Paginator do
 
     describe "#next" do
       it "return nil" do
-        expect(result.next).to eq(nil)
+        expect(result.next).to be_nil
       end
     end
 
     describe "#prev" do
       it "return nil" do
-        expect(result.prev).to eq(nil)
+        expect(result.prev).to be_nil
       end
     end
 
     describe "#last" do
       it "return nil" do
-        expect(result.last).to eq(nil)
+        expect(result.last).to be_nil
       end
     end
 
     describe "#first" do
       it "return nil" do
-        expect(result.first).to eq(nil)
+        expect(result.first).to be_nil
       end
     end
   end
@@ -80,25 +80,25 @@ describe FreckleIO::Paginator do
 
     describe "#next" do
       it "return nil" do
-        expect(result.next).to eq(nil)
+        expect(result.next).to be_nil
       end
     end
 
     describe "#prev" do
       it "return nil" do
-        expect(result.prev).to eq(nil)
+        expect(result.prev).to be_nil
       end
     end
 
     describe "#last" do
       it "return nil" do
-        expect(result.last).to eq(nil)
+        expect(result.last).to be_nil
       end
     end
 
     describe "#first" do
       it "return nil" do
-        expect(result.first).to eq(nil)
+        expect(result.first).to be_nil
       end
     end
   end

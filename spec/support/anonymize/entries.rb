@@ -1,15 +1,16 @@
 module Anonymize
   class Entries
     attr_accessor :interaction
+
     ENTRY_API_REPLACE_VALUES = {
-      id: /\"id\":(.*?),/i,
-      description: /\"description\":\"(.*?)\"/i,
-      name: /\"name\":\"(.*?)\"/i,
-      email: /\"email\":\"(.*?)\",/i,
-      first_name: /\"first_name\":\"(.*?)\"/i,
-      last_name: /\"last_name\":\"(.*?)\"/i,
-      profile_image_url: /\"profile_image_url\":\"(.*?)\"/i,
-      url: /\"url\":\"(.*?)\"/i
+      id: /"id":(.*?),/i,
+      description: /"description":"(.*?)"/i,
+      name: /"name":"(.*?)"/i,
+      email: /"email":"(.*?)",/i,
+      first_name: /"first_name":"(.*?)"/i,
+      last_name: /"last_name":"(.*?)"/i,
+      profile_image_url: /"profile_image_url":"(.*?)"/i,
+      url: /"url":"(.*?)"/i
     }.freeze
 
     def initialize(interaction:)

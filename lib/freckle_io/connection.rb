@@ -8,13 +8,11 @@ module FreckleIO
 
     # rubocop:disable Metrics/MethodLength
     def get(path, params: {}, request_options: {})
-      response = connection.get do |request|
+      connection.get do |request|
         authorize_request(request)
         set_request_options(request, request_options)
         request.url path, params
       end
-
-      response
     rescue Faraday::ConnectionFailed => e
       raise Errors::Connection::Failed.new(e), e.message
     rescue Faraday::ResourceNotFound => e

@@ -1,7 +1,8 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.7
+  NewCops: enable
   Exclude:
     - "bin/**/*"
     - ".bundle/**/*"
@@ -10,15 +11,18 @@ AllCops:
     - "node_modules/**/*"
     - "**/*.gemspec"
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 Layout/DotPosition:
   EnforcedStyle: trailing
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
+Layout/LineLength:
+  Enabled: true
+  Max: 80
 
 Metrics/BlockLength:
-  ExcludedMethods:
+  AllowedPatterns:
     - context
     - describe
     - feature
@@ -28,8 +32,6 @@ Metrics/BlockLength:
     - namespace
     - draw
 
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
 Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
