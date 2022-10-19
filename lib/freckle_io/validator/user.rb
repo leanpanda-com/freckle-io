@@ -1,43 +1,19 @@
 module FreckleIO
   module Validator
-    module User
-      # rubocop:disable Metrics/MethodLength,
-      # rubocop:disable Metrics/AbcSize,
-      # rubocop:disable Lint/NestedMethodDefinition
-      def self.validation(params, valid_keys)
-        Dry::Validation.Schema do
-          configure do
-            config.messages_file = File.join(
-              __dir__, "validation.yml"
-            )
-            config.namespace = :user
-
-            predicates(RestrictedHash)
-
-            option :allowed_keys
-
-            def valid_roles
-              %w(supervisor leader coworker contractor)
-            end
-
-            def valid_states
-              %w(disabled pending active suspended)
-            end
-          end
-
-          restricted_hash?(allowed_keys) do
-            optional(:name).filled :str?
-            optional(:email).filled :str?
-            optional(:email).value(format?: /\A[^@\s]+@[^@\s]+\z/)
-            optional(:role).value(included_in?: valid_roles)
-            optional(:state).value(included_in?: valid_states)
-            optional(:per_page).filled :int?
-          end
-        end.with(allowed_keys: valid_keys).call(params)
+    class User < FreckleIO::Validator::BaseContract
+      schema do
+        optional(:name).filled(:string)
+        optional(:email).filled(:string)
+        optional(:per_page).filled(:integer)
+        optional(:role).value(
+          included_in?: %w(supervisor leader coworker contractor)
+        )
+        optional(:state).value(
+          included_in?: %w(disabled pending active suspended)
+        )
       end
-      # rubocop:enable Metrics/MethodLength,
-      # rubocop:enable Metrics/AbcSize,
-      # rubocop:enable Lint/NestedMethodDefinition
+
+      rule(:email).validate(:email_format)
     end
   end
 end

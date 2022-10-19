@@ -59,10 +59,8 @@ describe FreckleIO::Client::Users do
 
       let(:results) { subject.all(params) }
 
-      it "raises a invalid params error" do
-        expect do
-          results
-        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      it "doesn't raise a invalid params error" do
+        expect { results }.not_to raise_error
       end
     end
 
@@ -116,11 +114,10 @@ describe FreckleIO::Client::Users do
 
     describe "with validator" do
       let(:user_validator) do
-        class_double(
-          FreckleIO::Validator::User,
-          errors: {},
-          output: {}
-        )
+        instance_double(FreckleIO::Validator::User)
+      end
+      let(:validation_result) do
+        instance_double(Dry::Validation::Result, errors: {}, to_h: {})
       end
 
       let(:result) do
@@ -128,22 +125,14 @@ describe FreckleIO::Client::Users do
       end
 
       before do
-        allow(FreckleIO::Validator::User).to receive(
-          :validation
-        ).with({}, FreckleIO::Client::Users::ALLOWED_KEYS) do
-          user_validator
-        end
-
-        allow(FreckleIO::Validator::User).to receive(:errors)
-        allow(FreckleIO::Validator::User).to receive(:output)
+        allow(FreckleIO::Validator::User).to receive(:new) { user_validator }
+        allow(user_validator).to receive(:call) { validation_result }
 
         result
       end
 
       it "call user's validator" do
-        expect(FreckleIO::Validator::User).to have_received(
-          :validation
-        )
+        expect(user_validator).to have_received(:call)
       end
     end
   end
