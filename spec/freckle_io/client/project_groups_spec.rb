@@ -57,10 +57,8 @@ describe FreckleIO::Client::ProjectGroups do
 
       let(:results) { subject.all(params) }
 
-      it "raises a invalid params error" do
-        expect do
-          results
-        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      it "doesn't raises a invalid params error" do
+        expect { results }.not_to raise_error
       end
     end
 
@@ -80,10 +78,10 @@ describe FreckleIO::Client::ProjectGroups do
       end
     end
 
-    describe "with project ids" do
+    describe "with wrong project ids" do
       let(:params) do
         {
-          state: 123
+          project_ids: 123
         }
       end
 
@@ -98,11 +96,10 @@ describe FreckleIO::Client::ProjectGroups do
 
     describe "with validator" do
       let(:project_group_validator) do
-        class_double(
-          FreckleIO::Validator::ProjectGroup,
-          errors: {},
-          output: {}
-        )
+        instance_double(FreckleIO::Validator::ProjectGroup)
+      end
+      let(:validation_result) do
+        instance_double(Dry::Validation::Result, errors: {}, to_h: {})
       end
 
       let(:result) do
@@ -110,22 +107,16 @@ describe FreckleIO::Client::ProjectGroups do
       end
 
       before do
-        allow(FreckleIO::Validator::ProjectGroup).to receive(
-          :validation
-        ).with({}, FreckleIO::Client::ProjectGroups::ALLOWED_KEYS) do
+        allow(FreckleIO::Validator::ProjectGroup).to receive(:new) do
           project_group_validator
         end
-
-        allow(FreckleIO::Validator::ProjectGroup).to receive(:errors)
-        allow(FreckleIO::Validator::ProjectGroup).to receive(:output)
+        allow(project_group_validator).to receive(:call) { validation_result }
 
         result
       end
 
       it "call project group's validator" do
-        expect(FreckleIO::Validator::ProjectGroup).to have_received(
-          :validation
-        )
+        expect(project_group_validator).to have_received(:call)
       end
     end
   end
