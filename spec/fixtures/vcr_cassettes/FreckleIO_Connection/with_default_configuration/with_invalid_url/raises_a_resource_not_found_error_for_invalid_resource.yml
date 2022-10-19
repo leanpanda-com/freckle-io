@@ -16,25 +16,22 @@ http_interactions:
   response:
     status:
       code: 404
-      message: Not Found
+      message: ''
     headers:
       Server:
       - nginx
       Date:
-      - Thu, 29 Aug 2019 08:07:46 GMT
-      Content-Type:
-      - text/html; charset=utf-8
+      - Wed, 19 Oct 2022 15:07:41 GMT
       Content-Length:
-      - '1'
-      Connection:
-      - keep-alive
-      Status:
-      - 404 Not Found
-      Cache-Control:
-      - private, max-age=0, must-revalidate
+      - '0'
+      X-Request-Id:
+      - f01bf275-7d15-4b46-8099-4d11f4f8721d
+      X-Runtime:
+      - '0.001570'
+      Vary:
+      - Origin
     body:
-      encoding: UTF-8
-      string: " "
-    http_version: 
-  recorded_at: Thu, 29 Aug 2019 08:07:46 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Wed, 19 Oct 2022 15:07:41 GMT
+recorded_with: VCR 6.1.0
