@@ -2,7 +2,6 @@ module FreckleIO
   module Client
     class Tags
       TAG_ENDPOINT = "/v2/tags".freeze
-      ALLOWED_KEYS = %i(name billable per_page).freeze
       VALIDATOR_MODULE = "FreckleIO::Validator::Tag".freeze
 
       def all(params = {})
@@ -22,11 +21,7 @@ module FreckleIO
       end
 
       def tag_params(params)
-        @tag_params = Params.new(
-          params,
-          ALLOWED_KEYS,
-          VALIDATOR_MODULE
-        ).call
+        @tag_params = Params.new(params, VALIDATOR_MODULE).call
       end
     end
   end
