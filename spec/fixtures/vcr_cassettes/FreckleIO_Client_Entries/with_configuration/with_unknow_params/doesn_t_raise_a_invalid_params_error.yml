@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.nokotime.com/v2/entries?approved_at_from=2018-01-15T00:00:00Z&approved_at_to=2018-01-15T00:00:00Z&approved_by_ids=1,2&billable=true&description=aaa&from=2018-01-01&per_page=30&project_ids=1,2&tag_filter_type=and&tag_ids=1,2&to=2018-01-01&updated_from=2018-01-15T00:00:00Z&updated_to=2018-01-15T00:00:00Z&user_ids=1,2
+    uri: https://api.nokotime.com/v2/entries?updated_from=2018-01-15T00:00:00Z&updated_to=2018-01-15T00:00:00Z
     body:
       encoding: US-ASCII
       string: ''
@@ -41,13 +41,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ccda6a69-143d-4715-9bcd-a01244ef3924
+      - 63e6a302-ff7f-445d-a35c-81f7c6da39d0
       X-Runtime:
-      - '0.037230'
+      - '0.040831'
       Vary:
       - Origin
     body:
       encoding: ASCII-8BIT
       string: "[]"
-  recorded_at: Wed, 19 Oct 2022 15:06:19 GMT
+  recorded_at: Wed, 19 Oct 2022 15:06:20 GMT
 recorded_with: VCR 6.1.0
