@@ -3,7 +3,7 @@ require_relative "../spec_helper"
 describe FreckleIO::Params do
   context "when invalid module" do
     subject do
-      described_class.new({}, nil, "invalid_module").call
+      described_class.new({}, "invalid_module").call
     end
 
     it "raises a invalid module error" do

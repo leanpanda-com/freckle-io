@@ -1,21 +1,18 @@
 module FreckleIO
   class Params
-    attr_reader :params
-    attr_reader :allowed_keys
-    attr_reader :validator_module
+    attr_reader :params,
+                :validator_module
 
     def initialize(
       params,
-      allowed_keys,
       validator_module
     )
       @params = params
-      @allowed_keys = allowed_keys
       @validator_module = validator_module
     end
 
     def call
-      return validator.output if valid?
+      return validator.to_h if valid?
 
       raise Errors::Params::InvalidParams.new, validator_messages
     end
@@ -27,7 +24,7 @@ module FreckleIO
     end
 
     def validator
-      @validator ||= which_validator_module.validation(params, allowed_keys)
+      @validator ||= which_validator_module.new.call(params)
     end
 
     def which_validator_module
@@ -37,9 +34,7 @@ module FreckleIO
     end
 
     def validator_messages
-      messages = validator.messages(full: true)
-      return messages.values.join(",") if messages.is_a?(Hash)
-
+      messages = validator.errors(full: true).messages
       messages.join(",")
     end
   end

@@ -29,16 +29,16 @@ require "dotenv"
 Dotenv.load(".env.test")
 
 RSpec.configure do |config|
-  config.before(:each) do
+  config.before do
     FreckleIO.configure do |c|
-      c.token = ENV["FRECKLE_TOKEN"]
+      c.token = ENV.fetch("FRECKLE_TOKEN", nil)
       c.auth_type = :freckle_token
       c.max_concurrency = 5
       c.url = "https://api.nokotime.com"
     end
   end
 
-  config.after(:each) do
+  config.after do
     FreckleIO.reset
   end
 

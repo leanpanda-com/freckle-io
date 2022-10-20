@@ -2,27 +2,6 @@ module FreckleIO
   module Client
     class Entries
       ENTRY_ENDPOINT = "/v2/entries".freeze
-      ALLOWED_KEYS = %i(
-        user_ids
-        description
-        project_ids
-        tag_ids
-        tag_filter_type
-        invoice_ids
-        import_ids
-        from
-        to
-        invoiced
-        invoiced_at_from
-        invoiced_at_to
-        updated_from
-        updated_to
-        billable
-        approved_at_from
-        approved_at_to
-        approved_by_ids
-        per_page
-      ).freeze
       VALIDATOR_MODULE = "FreckleIO::Validator::Entry".freeze
 
       def all(params = {})
@@ -42,11 +21,7 @@ module FreckleIO
       end
 
       def entry_params(params)
-        @entry_params = Params.new(
-          params,
-          ALLOWED_KEYS,
-          VALIDATOR_MODULE
-        ).call
+        @entry_params = Params.new(params, VALIDATOR_MODULE).call
       end
     end
   end

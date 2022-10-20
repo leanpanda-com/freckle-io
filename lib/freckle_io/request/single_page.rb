@@ -3,8 +3,8 @@ require "freckle_io/paginator"
 module FreckleIO
   module Request
     class SinglePage
-      attr_reader :last_response
-      attr_reader :raw_links
+      attr_reader :last_response,
+                  :raw_links
 
       def initialize
         @last_response = nil

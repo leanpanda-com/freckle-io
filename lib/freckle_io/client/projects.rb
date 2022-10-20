@@ -2,14 +2,6 @@ module FreckleIO
   module Client
     class Projects
       PROJECT_ENDPOINT = "/v2/projects".freeze
-      ALLOWED_KEYS = %i(
-        name
-        project_group_ids
-        billing_increment
-        enabled
-        billable
-        per_page
-      ).freeze
       VALIDATOR_MODULE = "FreckleIO::Validator::Project".freeze
 
       def all(params = {})
@@ -31,11 +23,7 @@ module FreckleIO
       end
 
       def project_params(params)
-        @project_params = Params.new(
-          params,
-          ALLOWED_KEYS,
-          VALIDATOR_MODULE
-        ).call
+        @project_params = Params.new(params, VALIDATOR_MODULE).call
       end
     end
   end

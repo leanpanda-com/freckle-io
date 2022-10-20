@@ -18,7 +18,10 @@ describe FreckleIO::Client::Projects do
     end
 
     describe "#show" do
-      let(:result) { subject.show(ENV["REAL_FRECKLE_PROJECT_ID"]) }
+      let(:real_freckle_project_id) do
+        ENV.fetch("REAL_FRECKLE_PROJECT_ID", nil)
+      end
+      let(:result) { subject.show(real_freckle_project_id) }
       let(:response) { result.last_response }
 
       it "get a spacific project" do
@@ -60,17 +63,15 @@ describe FreckleIO::Client::Projects do
 
       let(:results) { subject.all(params) }
 
-      it "raises a invalid params error" do
-        expect do
-          results
-        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      it "doesn't raises a invalid params error" do
+        expect { results }.not_to raise_error
       end
     end
 
     describe "with wrong name" do
       let(:params) do
         {
-          email: 1234
+          name: ""
         }
       end
 
@@ -102,7 +103,7 @@ describe FreckleIO::Client::Projects do
     describe "with wrong billing increment" do
       let(:params) do
         {
-          billing_increment: "1,3,7"
+          billing_increment: "3"
         }
       end
 
@@ -149,11 +150,10 @@ describe FreckleIO::Client::Projects do
 
     describe "with validator" do
       let(:project_validator) do
-        class_double(
-          FreckleIO::Validator::Project,
-          errors: {},
-          output: {}
-        )
+        instance_double(FreckleIO::Validator::Project)
+      end
+      let(:validation_result) do
+        instance_double(Dry::Validation::Result, errors: {}, to_h: {})
       end
 
       let(:result) do
@@ -161,22 +161,16 @@ describe FreckleIO::Client::Projects do
       end
 
       before do
-        allow(FreckleIO::Validator::Project).to receive(
-          :validation
-        ).with({}, FreckleIO::Client::Projects::ALLOWED_KEYS) do
+        allow(FreckleIO::Validator::Project).to receive(:new) do
           project_validator
         end
-
-        allow(FreckleIO::Validator::Project).to receive(:errors)
-        allow(FreckleIO::Validator::Project).to receive(:output)
+        allow(project_validator).to receive(:call) { validation_result }
 
         result
       end
 
       it "call project's validator" do
-        expect(FreckleIO::Validator::Project).to have_received(
-          :validation
-        )
+        expect(project_validator).to have_received(:call)
       end
     end
   end

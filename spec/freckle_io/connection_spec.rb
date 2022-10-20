@@ -16,7 +16,7 @@ describe FreckleIO::Connection do
       let(:header_token) { result.env.request_headers["X-FreckleToken"] }
 
       it "set X-FreckleToken" do
-        expect(header_token).not_to be nil
+        expect(header_token).not_to be_nil
       end
     end
 

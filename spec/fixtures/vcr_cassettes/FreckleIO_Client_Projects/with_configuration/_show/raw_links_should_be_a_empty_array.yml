@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://foo.com/7
+    uri: http://foo.com/6
     body:
       encoding: US-ASCII
       string: ''
@@ -16,33 +16,38 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
       Server:
       - nginx
       Date:
-      - Thu, 29 Aug 2019 08:07:25 GMT
+      - Wed, 19 Oct 2022 15:06:58 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '2284'
-      Connection:
-      - keep-alive
-      Status:
-      - 200 OK
-      Cache-Control:
-      - private, max-age=0, must-revalidate
       X-Frame-Options:
       - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"58eed19f9cd175d6241e523f9e2d6e81"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - '035185e7-9d28-41e5-b345-5d4bda4ab537'
       X-Runtime:
-      - '57'
+      - '0.079669'
       Vary:
       - Origin
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains
     body:
-      encoding: UTF-8
-      string: '{"id":0,"name":"name_0","description":"","billing_increment":5,"enabled":false,"billable":true,"color":"#13a480","created_at":"2018-07-16T08:32:45Z","updated_at":"2019-02-27T06:18:19Z","group":{"id":1,"name":"name_1","url":"http://foo.com/0"},"minutes":24670,"billable_minutes":22510,"unbillable_minutes":2160,"invoiced_minutes":0,"uninvoiced_minutes":22510,"remaining_minutes":-310,"budgeted_minutes":22200,"participants":[{"id":2,"email":"email_0@domain.com","first_name":"first_name_0","last_name":"last_name_0","profile_image_url":"http://foo.com/0","url":"http://foo.com/1"},{"id":3,"email":"email_1@domain.com","first_name":"first_name_1","last_name":"last_name_1","profile_image_url":"http://foo.com/1","url":"http://foo.com/2"},{"id":4,"email":"email_2@domain.com","first_name":"first_name_2","last_name":"last_name_2","profile_image_url":"http://foo.com/2","url":"http://foo.com/3"},{"id":5,"email":"email_3@domain.com","first_name":"first_name_3","last_name":"last_name_3","profile_image_url":"","url":"http://foo.com/4"},{"id":6,"email":"email_4@domain.com","first_name":"first_name_4","last_name":"last_name_4","profile_image_url":"http://foo.com/3","url":"http://foo.com/5"},{"id":7,"email":"email_5@domain.com","first_name":"first_name_5","last_name":"last_name_5","profile_image_url":"http://foo.com/4","url":"http://foo.com/6"}],"entries":102,"entries_url":"http://foo.com/7/entries","url":"http://foo.com/7","merge_url":"http://foo.com/7/merge","archive_url":"http://foo.com/7/archive","unarchive_url":"http://foo.com/7/unarchive"}'
-    http_version: 
-  recorded_at: Thu, 29 Aug 2019 08:07:25 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: '{"id":0,"name":"name_0","description":"","billing_increment":5,"enabled":true,"billable":true,"color":"#f6bed7","created_at":"2020-12-16T18:27:04Z","updated_at":"2022-08-07T21:24:00Z","group":{"id":1,"name":"name_1","url":"http://foo.com/0"},"minutes":3930,"billable_minutes":3495,"unbillable_minutes":435,"invoiced_minutes":0,"uninvoiced_minutes":3495,"remaining_minutes":null,"budgeted_minutes":null,"participants":[{"id":2,"email":"email_0@domain.com","first_name":"first_name_0","last_name":"last_name_0","profile_image_url":"http://foo.com/0","url":"http://foo.com/1"},{"id":3,"email":"email_1@domain.com","first_name":"first_name_1","last_name":"last_name_1","profile_image_url":"http://foo.com/1","url":"http://foo.com/2"},{"id":4,"email":"email_2@domain.com","first_name":"first_name_2","last_name":"last_name_2","profile_image_url":"http://foo.com/2","url":"http://foo.com/3"},{"id":5,"email":"email_3@domain.com","first_name":"first_name_3","last_name":"last_name_3","profile_image_url":"http://foo.com/3","url":"http://foo.com/4"},{"id":6,"email":"email_4@domain.com","first_name":"first_name_4","last_name":"last_name_4","profile_image_url":"http://foo.com/4","url":"http://foo.com/5"}],"entries":51,"entries_url":"http://foo.com/6/entries","url":"http://foo.com/6","merge_url":"http://foo.com/6/merge","archive_url":"http://foo.com/6/archive","unarchive_url":"http://foo.com/6/unarchive"}'
+  recorded_at: Wed, 19 Oct 2022 15:06:58 GMT
+recorded_with: VCR 6.1.0

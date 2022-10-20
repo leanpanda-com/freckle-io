@@ -1,25 +1,28 @@
 require_relative "../spec_helper"
 
 describe FreckleIO::Configuration do
+  let(:freckle_token) { ENV.fetch("FRECKLE_TOKEN", nil) }
+  let(:freckle_url) { ENV.fetch("FRECKLE_URL", nil) }
+
   context "with right configuration" do
     before do
       FreckleIO.reset
       FreckleIO.configure do |config|
-        config.token = ENV["FRECKLE_TOKEN"]
-        config.url = ENV["FRECKLE_URL"]
+        config.token = freckle_token
+        config.url = freckle_url
       end
     end
 
     it "return the correct token" do
       expect(
         FreckleIO.configuration.token
-      ).to eq ENV["FRECKLE_TOKEN"]
+      ).to eq freckle_token
     end
 
     it "return the correct url" do
       expect(
         FreckleIO.configuration.url
-      ).to eq ENV["FRECKLE_URL"]
+      ).to eq freckle_url
     end
   end
 

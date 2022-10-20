@@ -3,9 +3,9 @@ require "faraday_middleware"
 module FreckleIO
   module Request
     class MultiplePages
-      attr_reader :path
-      attr_reader :params
-      attr_reader :last_responses
+      attr_reader :path,
+                  :params,
+                  :last_responses
 
       def get(path, params: {})
         @path ||= path

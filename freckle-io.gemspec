@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name         = "freckle_io"
-  spec.version      = "0.1.2"
+  spec.version      = "1.0.0"
   spec.authors      = ["Domenico Giuseppe Garofoli"]
   spec.email        = ["sirion1987@gmail.com"]
 
@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.license      = "MIT"
   spec.require_path = ["lib"]
 
-  spec.required_ruby_version = '>= 2.4.0'
+  spec.required_ruby_version = '>= 2.7.0'
 
   spec.files        = `git ls-files -z`.split("\x0")
   spec.test_files   = Dir["spec/**/*.rb"]
@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
 
   spec.add_runtime_dependency "dotenv"
-  spec.add_runtime_dependency "dry-validation", "0.13.0"
+  spec.add_runtime_dependency "dry-validation", "~> 1.9.0"
   spec.add_runtime_dependency "faraday", ">= 0.15.2"
   spec.add_runtime_dependency "faraday_middleware", ">= 0.12"
   spec.add_runtime_dependency "typhoeus"

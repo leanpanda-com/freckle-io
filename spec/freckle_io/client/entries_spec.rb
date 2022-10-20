@@ -73,25 +73,23 @@ describe FreckleIO::Client::Entries do
         {
           invalid_params: "oh! oh!",
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
       let(:results) { subject.all(params) }
 
-      it "raises a invalid params error" do
-        expect do
-          results
-        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      it "doesn't raise a invalid params error" do
+        expect { results }.not_to raise_error
       end
     end
 
     describe "with wrong user ids" do
       let(:params) do
         {
-          user_id: 1234,
+          user_ids: 1234,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -109,7 +107,7 @@ describe FreckleIO::Client::Entries do
         {
           description: 1234,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -127,7 +125,7 @@ describe FreckleIO::Client::Entries do
         {
           project_ids: 123,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -145,7 +143,7 @@ describe FreckleIO::Client::Entries do
         {
           tag_ids: 12,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -163,7 +161,7 @@ describe FreckleIO::Client::Entries do
         {
           tag_filter_type: "or",
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -199,7 +197,7 @@ describe FreckleIO::Client::Entries do
         {
           to: 123,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -247,9 +245,9 @@ describe FreckleIO::Client::Entries do
     describe "with wrong billable" do
       let(:params) do
         {
-          tag_filter_type: 123,
+          billable: 123,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -267,7 +265,7 @@ describe FreckleIO::Client::Entries do
         {
           approved_at_from: 123,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -285,7 +283,7 @@ describe FreckleIO::Client::Entries do
         {
           approved_at_to: 123,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -303,7 +301,7 @@ describe FreckleIO::Client::Entries do
         {
           approved_by_ids: 123,
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -318,17 +316,16 @@ describe FreckleIO::Client::Entries do
 
     describe "with validator" do
       let(:entry_validator) do
-        class_double(
-          FreckleIO::Validator::Entry,
-          errors: {},
-          output: params
-        )
+        instance_double(FreckleIO::Validator::Entry)
+      end
+      let(:validation_result) do
+        instance_double(Dry::Validation::Result, errors: {}, to_h: params)
       end
 
       let(:params) do
         {
           updated_from: "2018-01-15T00:00:00Z",
-          updated_to: "2018-01-16T00:00:00Z"
+          updated_to: "2018-01-15T00:00:00Z"
         }
       end
 
@@ -337,22 +334,16 @@ describe FreckleIO::Client::Entries do
       end
 
       before do
-        allow(FreckleIO::Validator::Entry).to receive(
-          :validation
-        ).with(params, FreckleIO::Client::Entries::ALLOWED_KEYS) do
+        allow(FreckleIO::Validator::Entry).to receive(:new) do
           entry_validator
         end
-
-        allow(FreckleIO::Validator::Entry).to receive(:errors)
-        allow(FreckleIO::Validator::Entry).to receive(:output)
+        allow(entry_validator).to receive(:call) { validation_result }
 
         result
       end
 
       it "call entry's validator" do
-        expect(FreckleIO::Validator::Entry).to have_received(
-          :validation
-        )
+        expect(entry_validator).to have_received(:call)
       end
     end
   end

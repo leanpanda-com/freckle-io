@@ -1,11 +1,12 @@
 module Anonymize
   class Tags
     attr_accessor :interaction
+
     TAG_API_REPLACE_VALUES = {
-      id: /\"id\":(.*?),/mi,
-      name: /\"name\":\"(.*?)\"/mi,
-      formatted_name: /\"formatted_name\":\"(.*?)\"/mi,
-      url: /\"url\":\"(.*?)\"/mi
+      id: /"id":(.*?),/mi,
+      name: /"name":"(.*?)"/mi,
+      formatted_name: /"formatted_name":"(.*?)"/mi,
+      url: /"url":"(.*?)"/mi
     }.freeze
 
     def initialize(interaction:)

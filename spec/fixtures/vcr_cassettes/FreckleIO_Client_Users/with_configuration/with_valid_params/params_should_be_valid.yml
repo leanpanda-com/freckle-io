@@ -16,33 +16,38 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
       Server:
       - nginx
       Date:
-      - Thu, 29 Aug 2019 08:07:40 GMT
+      - Wed, 19 Oct 2022 15:07:36 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '2'
-      Connection:
-      - keep-alive
-      Status:
-      - 200 OK
-      Cache-Control:
-      - private, max-age=0, must-revalidate
       X-Frame-Options:
       - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"4f53cda18c2baa0c0354bb5f9a3ecbe5"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 56419faa-a9a5-4b34-915e-8760917e735e
       X-Runtime:
-      - '42'
+      - '0.122900'
       Vary:
       - Origin
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: "[]"
-    http_version: 
-  recorded_at: Thu, 29 Aug 2019 08:07:41 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Wed, 19 Oct 2022 15:07:36 GMT
+recorded_with: VCR 6.1.0

@@ -57,10 +57,8 @@ describe FreckleIO::Client::Tags do
 
       let(:results) { subject.all(params) }
 
-      it "raises a invalid params error" do
-        expect do
-          results
-        end.to raise_error(FreckleIO::Errors::Params::InvalidParams)
+      it "doesn't raise a invalid params error" do
+        expect { results }.not_to raise_error
       end
     end
 
@@ -83,7 +81,7 @@ describe FreckleIO::Client::Tags do
     describe "with billable" do
       let(:params) do
         {
-          state: 123
+          billable: 123
         }
       end
 
@@ -98,11 +96,10 @@ describe FreckleIO::Client::Tags do
 
     describe "with validator" do
       let(:tag_validator) do
-        class_double(
-          FreckleIO::Validator::Tag,
-          errors: {},
-          output: {}
-        )
+        instance_double(FreckleIO::Validator::Tag)
+      end
+      let(:validation_result) do
+        instance_double(Dry::Validation::Result, errors: {}, to_h: {})
       end
 
       let(:result) do
@@ -110,22 +107,16 @@ describe FreckleIO::Client::Tags do
       end
 
       before do
-        allow(FreckleIO::Validator::Tag).to receive(
-          :validation
-        ).with({}, FreckleIO::Client::Tags::ALLOWED_KEYS) do
+        allow(FreckleIO::Validator::Tag).to receive(:new) do
           tag_validator
         end
-
-        allow(FreckleIO::Validator::Tag).to receive(:errors)
-        allow(FreckleIO::Validator::Tag).to receive(:output)
+        allow(tag_validator).to receive(:call) { validation_result }
 
         result
       end
 
       it "call tag's validator" do
-        expect(FreckleIO::Validator::Tag).to have_received(
-          :validation
-        )
+        expect(tag_validator).to have_received(:call)
       end
     end
   end

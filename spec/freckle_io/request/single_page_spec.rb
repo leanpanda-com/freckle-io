@@ -17,7 +17,7 @@ describe FreckleIO::Request::SinglePage do
       let(:body_response) { next_users.last_response.body }
 
       it "previous page should be not nil" do
-        expect(next_users.prev).to_not be nil
+        expect(next_users.prev).to_not be_nil
       end
 
       it "previous page is a SinglePage" do
@@ -39,7 +39,7 @@ describe FreckleIO::Request::SinglePage do
 
       context "when get prev page from the first page" do
         it "prev should be nil" do
-          expect(prev_users.prev).to be nil
+          expect(prev_users.prev).to be_nil
         end
       end
     end
@@ -53,7 +53,7 @@ describe FreckleIO::Request::SinglePage do
       let(:body_response) { last_users.last_response.body }
 
       it "next page should be nil" do
-        expect(last_users.next).to be nil
+        expect(last_users.next).to be_nil
       end
 
       it "returns correct raw links for the last page" do
@@ -62,7 +62,7 @@ describe FreckleIO::Request::SinglePage do
 
       context "when get prev page from the last page" do
         it "prev should be nil" do
-          expect(last_users.first.prev).to be nil
+          expect(last_users.first.prev).to be_nil
         end
       end
     end
@@ -72,7 +72,7 @@ describe FreckleIO::Request::SinglePage do
       let(:body_response) { first_users.last_response.body }
 
       it "prev page should be nil" do
-        expect(first_users.prev).to be nil
+        expect(first_users.prev).to be_nil
       end
 
       it "next page should be a SinglePage" do
@@ -81,7 +81,7 @@ describe FreckleIO::Request::SinglePage do
 
       context "when get last page from the first page" do
         it "next should be nil" do
-          expect(first_users.last.next).to be nil
+          expect(first_users.last.next).to be_nil
         end
       end
     end

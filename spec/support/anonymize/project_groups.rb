@@ -1,10 +1,11 @@
 module Anonymize
   class ProjectGroups
     attr_accessor :interaction
+
     PROJECT_GROUP_API_REPLACE_VALUES = {
-      id: /\"id\":(.*?),/mi,
-      name: /\"name\":\"(.*?)\"/mi,
-      url: /\"url\":\"(.*?)\"/mi
+      id: /"id":(.*?),/mi,
+      name: /"name":"(.*?)"/mi,
+      url: /"url":"(.*?)"/mi
     }.freeze
 
     def initialize(interaction:)
