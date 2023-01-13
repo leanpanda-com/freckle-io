@@ -13,7 +13,7 @@ module FreckleIO
 
       case auth_type
       when :freckle_token
-        request.headers["X-FreckleToken"] = token
+        request.headers["X-NokoToken"] = token
       end
     end
 
